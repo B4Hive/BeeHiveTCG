@@ -11,14 +11,16 @@ package br.ufjf.dcc025.encorecrossover;
 public class EncoreCrossover {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        EData.initBaseData();
+        EGameplay.newGame();
+        EData.exportData();
     }
 }
 /*
 Objects{
+    Skills;
     Characters;
     Effects;
-    Skills;
     Items;
     Users;
 }
@@ -31,5 +33,6 @@ Subclasses{
 Program{
     Screen;
     Gameplay;
+    Data;
 }
 */
