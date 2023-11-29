@@ -5,5 +5,5 @@ ESkillEffect:name=BDOT, value=1, cooldown=3, effect=DOT, duration=2;
 ESkillHeal:name=BHEAL, value=3, cooldown=2;
 EChar:name=NPC, skills=BATK/BDOT/BHEAL/BHOT/BBUFF;
 EChar:name=PC, skills=BATK/BDOT/BHEAL/BHOT/BBUFF;
-EPlayer:name=default;
+EPlayer:name=default, password=default, favChars=[EPlayer:name=default, password=default, favChars=];
 EAdmin:name=admin, password=admin, favChars=[NPC/PC/EAdmin:name=admin, password=admin, favChars=[NPC/PC];

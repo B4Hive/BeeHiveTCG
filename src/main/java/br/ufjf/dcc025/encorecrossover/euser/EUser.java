@@ -137,8 +137,6 @@ public abstract class EUser {
     public void removeItem(String item){
         
     }
-    /*
-    
     */
     //WIP above
     @Override
