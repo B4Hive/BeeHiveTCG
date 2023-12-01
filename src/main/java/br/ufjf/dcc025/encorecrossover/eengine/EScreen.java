@@ -4,12 +4,14 @@
  */
 package br.ufjf.dcc025.encorecrossover.eengine;
 
+import br.ufjf.dcc025.encorecrossover.echar.EChar;
 import br.ufjf.dcc025.encorecrossover.edata.EData;
+import br.ufjf.dcc025.encorecrossover.eskill.ESkill;
 import br.ufjf.dcc025.encorecrossover.euser.EPlayer;
 import br.ufjf.dcc025.encorecrossover.euser.EUser;
+import static java.awt.event.KeyEvent.VK_ENTER;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 
 /**
@@ -47,6 +49,7 @@ public class EScreen extends javax.swing.JFrame {
         selectedCharTextArea = new javax.swing.JTextArea();
         charListToolBar = new javax.swing.JToolBar();
         newGameButton = new javax.swing.JButton();
+        addCharButton = new javax.swing.JButton();
         removeCharacterButton = new javax.swing.JButton();
         userHistoryPanel = new javax.swing.JPanel();
         historyToolBar = new javax.swing.JToolBar();
@@ -57,15 +60,6 @@ public class EScreen extends javax.swing.JFrame {
         historyList = new javax.swing.JList<>();
         jScrollPane4 = new javax.swing.JScrollPane();
         historyTextArea = new javax.swing.JTextArea();
-        loginPane = new javax.swing.JPanel();
-        loginPaneLabel = new javax.swing.JLabel();
-        loginInnerPanel = new javax.swing.JPanel();
-        usernameLabel = new javax.swing.JLabel();
-        usernameField = new javax.swing.JTextField();
-        passwordLabel = new javax.swing.JLabel();
-        passwordField = new javax.swing.JPasswordField();
-        loginButton = new javax.swing.JButton();
-        createButton = new javax.swing.JButton();
         gamePane = new javax.swing.JPanel();
         inGameActionPanel = new javax.swing.JPanel();
         actionLabel = new javax.swing.JLabel();
@@ -82,15 +76,20 @@ public class EScreen extends javax.swing.JFrame {
         inGameCharTextArea2 = new javax.swing.JTextArea();
         jScrollPane7 = new javax.swing.JScrollPane();
         turnSummaryTextArea = new javax.swing.JTextArea();
+        loginPane = new javax.swing.JPanel();
+        loginPaneLabel = new javax.swing.JLabel();
+        loginInnerPanel = new javax.swing.JPanel();
+        usernameLabel = new javax.swing.JLabel();
+        usernameField = new javax.swing.JTextField();
+        passwordLabel = new javax.swing.JLabel();
+        passwordField = new javax.swing.JPasswordField();
+        loginButton = new javax.swing.JButton();
+        createButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         userMenu = new javax.swing.JMenu();
         editUserMenu = new javax.swing.JMenu();
         editNameMenuItem = new javax.swing.JMenuItem();
         editPasswordMenuItem = new javax.swing.JMenuItem();
-        exitMenuItem = new javax.swing.JMenuItem();
-        charMenu = new javax.swing.JMenu();
-        listCharMenuItem = new javax.swing.JMenuItem();
-        createCharMenuItem = new javax.swing.JMenuItem();
         skillsMenu = new javax.swing.JMenu();
         listSkillsMenuItem = new javax.swing.JMenuItem();
         createSkillMenuItem = new javax.swing.JMenuItem();
@@ -106,7 +105,6 @@ public class EScreen extends javax.swing.JFrame {
         setTitle("Encore Crossover");
         setBackground(new java.awt.Color(51, 51, 51));
         setMinimumSize(new java.awt.Dimension(640, 480));
-        setPreferredSize(new java.awt.Dimension(640, 480));
         setSize(new java.awt.Dimension(640, 480));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -114,7 +112,7 @@ public class EScreen extends javax.swing.JFrame {
             }
         });
 
-        layeredPane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Made by BeeHive", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.ABOVE_BOTTOM, new java.awt.Font("Comic Sans MS", 0, 14))); // NOI18N
+        layeredPane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Made by BeeHive", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.ABOVE_BOTTOM, new java.awt.Font("Segoe Script", 1, 12))); // NOI18N
         layeredPane.setPreferredSize(new java.awt.Dimension(870, 440));
         layeredPane.setLayout(new javax.swing.OverlayLayout(layeredPane));
 
@@ -141,6 +139,11 @@ public class EScreen extends javax.swing.JFrame {
             public String getElementAt(int i) { return strings[i]; }
         });
         favCharList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        favCharList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                favCharListValueChanged(evt);
+            }
+        });
         jScrollPane1.setViewportView(favCharList);
 
         favCharSplitPane.setLeftComponent(jScrollPane1);
@@ -149,7 +152,6 @@ public class EScreen extends javax.swing.JFrame {
         selectedCharTextArea.setColumns(20);
         selectedCharTextArea.setLineWrap(true);
         selectedCharTextArea.setRows(5);
-        selectedCharTextArea.setText("Name\nSkill 1\nSkill 2\nSkill 3\n...\n");
         jScrollPane2.setViewportView(selectedCharTextArea);
 
         favCharSplitPane.setRightComponent(jScrollPane2);
@@ -160,12 +162,28 @@ public class EScreen extends javax.swing.JFrame {
         charListToolBar.setRollover(true);
 
         newGameButton.setText("New Game");
+        newGameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newGameButtonActionPerformed(evt);
+            }
+        });
         charListToolBar.add(newGameButton);
+
+        addCharButton.setText("Add Character");
+        addCharButton.setFocusable(false);
+        addCharButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        addCharButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        charListToolBar.add(addCharButton);
 
         removeCharacterButton.setText("Remove Character");
         removeCharacterButton.setFocusable(false);
         removeCharacterButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         removeCharacterButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        removeCharacterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeCharacterButtonActionPerformed(evt);
+            }
+        });
         charListToolBar.add(removeCharacterButton);
 
         userCharPanel.add(charListToolBar, java.awt.BorderLayout.PAGE_END);
@@ -222,63 +240,6 @@ public class EScreen extends javax.swing.JFrame {
 
         layeredPane.add(userPane);
 
-        loginPane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Login", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
-        loginPane.setLayout(new java.awt.BorderLayout());
-
-        loginPaneLabel.setFont(new java.awt.Font("Unispace", 1, 48)); // NOI18N
-        loginPaneLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        loginPaneLabel.setText("Encore Crossover");
-        loginPane.add(loginPaneLabel, java.awt.BorderLayout.CENTER);
-
-        loginInnerPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        loginInnerPanel.setLayout(new javax.swing.BoxLayout(loginInnerPanel, javax.swing.BoxLayout.LINE_AXIS));
-
-        usernameLabel.setText("Username:");
-        loginInnerPanel.add(usernameLabel);
-
-        usernameField.setText("Username");
-        usernameField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                usernameFieldFocusGained(evt);
-            }
-        });
-        loginInnerPanel.add(usernameField);
-
-        passwordLabel.setText("Password:");
-        loginInnerPanel.add(passwordLabel);
-
-        passwordField.setText("Password");
-        passwordField.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                passwordFieldFocusLost(evt);
-            }
-        });
-        loginInnerPanel.add(passwordField);
-
-        loginButton.setText("Login");
-        loginButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                loginButtonActionPerformed(evt);
-            }
-        });
-        loginInnerPanel.add(loginButton);
-
-        createButton.setText("Create");
-        createButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createButtonActionPerformed(evt);
-            }
-        });
-        loginInnerPanel.add(createButton);
-
-        loginPane.add(loginInnerPanel, java.awt.BorderLayout.PAGE_END);
-
-        loginPane.setVisible(true);
-        userPane.setVisible(false);
-        gamePane.setVisible(false);
-
-        layeredPane.add(loginPane);
-
         gamePane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Game", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
         gamePane.setLayout(new java.awt.BorderLayout());
 
@@ -289,15 +250,26 @@ public class EScreen extends javax.swing.JFrame {
         inGameActionPanel.add(actionLabel);
 
         actionComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        actionComboBox.setSelectedItem(null);
+        actionComboBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                actionComboBoxItemStateChanged(evt);
+            }
+        });
         inGameActionPanel.add(actionComboBox);
 
         targetLabel.setText("Target:");
         inGameActionPanel.add(targetLabel);
 
-        targetComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        targetComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enemy", "Self" }));
         inGameActionPanel.add(targetComboBox);
 
         executeButton.setText("Execute");
+        executeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                executeButtonActionPerformed(evt);
+            }
+        });
         inGameActionPanel.add(executeButton);
 
         gamePane.add(inGameActionPanel, java.awt.BorderLayout.PAGE_END);
@@ -345,11 +317,73 @@ public class EScreen extends javax.swing.JFrame {
 
         layeredPane.add(gamePane);
 
+        loginPane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Login", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
+        loginPane.setLayout(new java.awt.BorderLayout());
+
+        loginPaneLabel.setFont(new java.awt.Font("Unispace", 1, 48)); // NOI18N
+        loginPaneLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        loginPaneLabel.setText("Encore Crossover");
+        loginPane.add(loginPaneLabel, java.awt.BorderLayout.CENTER);
+
+        loginInnerPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        loginInnerPanel.setLayout(new javax.swing.BoxLayout(loginInnerPanel, javax.swing.BoxLayout.LINE_AXIS));
+
+        usernameLabel.setText("Username:");
+        loginInnerPanel.add(usernameLabel);
+
+        usernameField.setText("Username");
+        usernameField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                usernameFieldFocusGained(evt);
+            }
+        });
+        loginInnerPanel.add(usernameField);
+
+        passwordLabel.setText("Password:");
+        loginInnerPanel.add(passwordLabel);
+
+        passwordField.setText("Password");
+        passwordField.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                passwordFieldFocusGained(evt);
+            }
+        });
+        loginInnerPanel.add(passwordField);
+
+        loginButton.setText("Login");
+        loginButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loginButtonActionPerformed(evt);
+            }
+        });
+        loginInnerPanel.add(loginButton);
+
+        createButton.setText("Create");
+        createButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createButtonActionPerformed(evt);
+            }
+        });
+        loginInnerPanel.add(createButton);
+
+        loginPane.add(loginInnerPanel, java.awt.BorderLayout.PAGE_END);
+
+        loginPane.setVisible(true);
+        userPane.setVisible(false);
+        gamePane.setVisible(false);
+
+        layeredPane.add(loginPane);
+
         userMenu.setText("User");
 
         editUserMenu.setText("Edit");
 
         editNameMenuItem.setText("Name");
+        editNameMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editNameMenuItemActionPerformed(evt);
+            }
+        });
         editUserMenu.add(editNameMenuItem);
 
         editPasswordMenuItem.setText("Password");
@@ -357,25 +391,7 @@ public class EScreen extends javax.swing.JFrame {
 
         userMenu.add(editUserMenu);
 
-        exitMenuItem.setText("Exit");
-        userMenu.add(exitMenuItem);
-
         jMenuBar1.add(userMenu);
-
-        charMenu.setText("Characters");
-
-        listCharMenuItem.setText("List");
-        listCharMenuItem.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                listCharMenuItemActionPerformed(evt);
-            }
-        });
-        charMenu.add(listCharMenuItem);
-
-        createCharMenuItem.setText("Create");
-        charMenu.add(createCharMenuItem);
-
-        jMenuBar1.add(charMenu);
 
         skillsMenu.setText("Skills");
 
@@ -424,10 +440,6 @@ public class EScreen extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void listCharMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_listCharMenuItemActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_listCharMenuItemActionPerformed
-
     private void aboutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_aboutMenuItemActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_aboutMenuItemActionPerformed
@@ -449,11 +461,6 @@ public class EScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         usernameField.selectAll();
     }//GEN-LAST:event_usernameFieldFocusGained
-
-    private void passwordFieldFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFieldFocusLost
-        // TODO add your handling code here:
-        passwordField.selectAll();
-    }//GEN-LAST:event_passwordFieldFocusLost
 
     private void createButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createButtonActionPerformed
         // TODO add your handling code here:
@@ -482,7 +489,96 @@ public class EScreen extends javax.swing.JFrame {
             charList[i] = list.get(i);
         }
         favCharList.setListData(charList);
+        
+        //list.clear(); gotta update the history list as well
     }//GEN-LAST:event_userPaneComponentShown
+
+    private void favCharListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_favCharListValueChanged
+        // TODO add your handling code here:
+        if(favCharList.getSelectedValue() == null){
+            selectedCharTextArea.setText("");
+            return;
+        }
+        String cName = favCharList.getSelectedValue();
+        selectedCharTextArea.setText(EChar.get(cName).getProfile());
+    }//GEN-LAST:event_favCharListValueChanged
+
+    private void editNameMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editNameMenuItemActionPerformed
+        // TODO add your handling code here:
+        String newName = JOptionPane.showInputDialog(
+                layeredPane, "Insert new username:",
+                "User", 3);
+        if(user.setName(newName))
+            JOptionPane.showMessageDialog(
+                    layeredPane, "Username changed successfully.",
+                    "User", 1);
+        else
+            JOptionPane.showMessageDialog(
+                    layeredPane, "Username change failed.",
+                    "User", 0);
+    }//GEN-LAST:event_editNameMenuItemActionPerformed
+
+    private void newGameButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newGameButtonActionPerformed
+        // TODO add your handling code here:
+        if(favCharList.getSelectedValue() != null){
+            fight = EFight.pve(user, favCharList.getSelectedValue());
+            fight.start();
+            inGameCharTextArea1.setText(fight.getChar1());
+            inGameCharTextArea2.setText(fight.getChar2());
+            actionComboBox.removeAllItems();
+            for(String s : fight.getActionList())
+                actionComboBox.addItem(s);
+            actionComboBox.setSelectedIndex(0);
+            selectedActionTextArea.setText(ESkill.get(actionComboBox.getItemAt(actionComboBox.getSelectedIndex())).getDescription());
+            turnSummaryTextArea.setText("Start Fight!");
+            userPane.setVisible(false);
+            layeredPane.setLayer(gamePane, layeredPane.highestLayer());
+            gamePane.setVisible(true);
+        }
+    }//GEN-LAST:event_newGameButtonActionPerformed
+
+    private void removeCharacterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeCharacterButtonActionPerformed
+        // TODO add your handling code here:
+        if(JOptionPane.showConfirmDialog(layeredPane, "Remove Character from List?", "Remove", 0) == 1)
+            return;
+        String name = favCharList.getSelectedValue();
+        user.removeFavChar(name);
+        userPaneComponentShown(null);
+    }//GEN-LAST:event_removeCharacterButtonActionPerformed
+
+    private void passwordFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFieldFocusGained
+        // TODO add your handling code here:
+        passwordField.selectAll();
+    }//GEN-LAST:event_passwordFieldFocusGained
+
+    private void executeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_executeButtonActionPerformed
+        // TODO add your handling code here:
+        String action = actionComboBox.getItemAt(actionComboBox.getSelectedIndex());
+        String target = targetComboBox.getItemAt(targetComboBox.getSelectedIndex());
+        turnSummaryTextArea.setText(fight.turn(target, action));
+        inGameCharTextArea1.setText(fight.getChar1());
+        actionComboBox.removeAllItems();
+        for(String s : fight.getActionList())
+            actionComboBox.addItem(s);
+        inGameCharTextArea2.setText(fight.getChar2());
+        actionComboBox.setSelectedIndex(0);
+        selectedActionTextArea.setText(ESkill.get(actionComboBox.getItemAt(actionComboBox.getSelectedIndex())).getDescription());
+        if(fight.end()){
+            JOptionPane.showMessageDialog(layeredPane, "Fight Ended.", "Encore", 1);
+            gamePane.setVisible(false);
+            layeredPane.setLayer(userPane, layeredPane.highestLayer());
+            userPane.setVisible(true);
+        }
+    }//GEN-LAST:event_executeButtonActionPerformed
+
+    private void actionComboBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_actionComboBoxItemStateChanged
+        // TODO add your handling code here:
+        String action = actionComboBox.getItemAt(actionComboBox.getSelectedIndex());
+        if(action != null)
+            selectedActionTextArea.setText(ESkill.get(action).getDescription());
+        else
+            selectedActionTextArea.setText("Choose Action");
+    }//GEN-LAST:event_actionComboBoxItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -520,20 +616,19 @@ public class EScreen extends javax.swing.JFrame {
     }
     //BeeHive
     private EUser user;
+    private EFight fight;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem aboutMenuItem;
     private javax.swing.JComboBox<String> actionComboBox;
     private javax.swing.JLabel actionLabel;
+    private javax.swing.JButton addCharButton;
     private javax.swing.JToolBar charListToolBar;
-    private javax.swing.JMenu charMenu;
     private javax.swing.JButton createButton;
-    private javax.swing.JMenuItem createCharMenuItem;
     private javax.swing.JMenuItem createSkillMenuItem;
     private javax.swing.JMenuItem editNameMenuItem;
     private javax.swing.JMenuItem editPasswordMenuItem;
     private javax.swing.JMenu editUserMenu;
     private javax.swing.JButton executeButton;
-    private javax.swing.JMenuItem exitMenuItem;
     private javax.swing.JList<String> favCharList;
     private javax.swing.JSplitPane favCharSplitPane;
     private javax.swing.JPanel gamePane;
@@ -561,7 +656,6 @@ public class EScreen extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JLayeredPane layeredPane;
-    private javax.swing.JMenuItem listCharMenuItem;
     private javax.swing.JMenuItem listSkillsMenuItem;
     private javax.swing.JButton loginButton;
     private javax.swing.JPanel loginInnerPanel;
