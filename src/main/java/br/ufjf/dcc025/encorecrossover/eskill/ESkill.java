@@ -69,9 +69,7 @@ public abstract class ESkill {
     }
     
     public boolean isOnCooldown(){
-        if(timer > 0)
-            return true;
-        return false;
+        return timer > 0;
     }
     
     public void tickCooldown(){

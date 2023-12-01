@@ -436,6 +436,9 @@
                                 </Property>
                                 <Property name="selectionMode" type="int" value="0"/>
                               </Properties>
+                              <Events>
+                                <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="historyListValueChanged"/>
+                              </Events>
                               <AuxValues>
                                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                               </AuxValues>
@@ -460,7 +463,7 @@
                                 <Property name="columns" type="int" value="20"/>
                                 <Property name="lineWrap" type="boolean" value="true"/>
                                 <Property name="rows" type="int" value="5"/>
-                                <Property name="text" type="java.lang.String" value="Selected Character&apos;s Information&#xa;"/>
+                                <Property name="text" type="java.lang.String" value="History"/>
                               </Properties>
                             </Component>
                           </SubComponents>

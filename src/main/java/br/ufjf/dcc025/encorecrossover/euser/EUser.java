@@ -1,6 +1,5 @@
 package br.ufjf.dcc025.encorecrossover.euser;
 
-import br.ufjf.dcc025.encorecrossover.echar.EChar;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -19,9 +18,9 @@ public abstract class EUser {
     //attributes
     private static EUser current = null;
     
-    private final String name;
-    private final String password;
-    private final List<String> history;
+    private String name;
+    private String password;
+    private final List<String[]> history;
     private final Set<String> favChars;
     
     //constructor
@@ -64,6 +63,14 @@ public abstract class EUser {
         
         return string;
     }
+    public boolean setName(String username){
+        if(users.containsKey(username))
+            return false;
+        users.remove(this.name);
+        this.name = username;
+        users.put(username, this);
+        return true;
+    }
     
     public static EUser login(String name, String password){
         if(users.get(name) != null){
@@ -83,31 +90,34 @@ public abstract class EUser {
     public abstract List<String> listOptions();
     public abstract <T> void selectOption(String option, T obj);
     
-    public String readHistory(int amount){
-        String h = name + "'s History\n";
-        for(int i = history.size()-1; i > history.size()-amount; i--){
-            h = "[" + i + "] " + history.get(i) + "\n";
-        }
-        return h;
-    }
-    public void addHistory(String string){
+    public void addHistory(String[] string){
         history.add(string);
     }
-    public boolean removeHistory(int index, String string){
-        if(history.get(index).equals(string)){
-            history.remove(string);
-            return true;
-        }
-        return false;
+    public String getHistory(int id){
+        String string = "";
+        for(String s : history.get(id))
+            string += s + "\n";
+        return string;
+    }
+    public void removeHistory(String[] content){
+        history.remove(content);
+    }
+    public List<String[]> listHistory(){
+        List<String[]> list = new ArrayList<>();
+        list.addAll(history);
+        return list;
     }
     
-    public void addFavChar(EChar character){
-        favChars.add(character.getName());
+    public void addFavChar(String character){
+        favChars.add(character);
     }
     public List<String> getFavList(){
         List<String> temp = new ArrayList<>();
         temp.addAll(favChars);
         return temp;
+    }
+    public void removeFavChar(String character){
+        favChars.remove(character);
     }
     
     abstract void sendRequest(String request);

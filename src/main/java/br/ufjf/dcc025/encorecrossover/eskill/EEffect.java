@@ -39,7 +39,7 @@ public class EEffect {
     }
     public String getDescription(){
         String string = getName() + ": ";
-        //effect description
+        string += "NYI. EEffect.getDescription()";
         return string;
     }
     //methods

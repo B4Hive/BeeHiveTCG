@@ -38,6 +38,7 @@ public class ESkillEffect extends ESkill {
         else
             string += "Permanent. ";
         string += "Cooldown " + getCooldown() + " turns. ";
+        string += effect.getDescription();
         return string;
     }
     @Override

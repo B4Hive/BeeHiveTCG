@@ -2,7 +2,7 @@ package br.ufjf.dcc025.encorecrossover;
 
 import br.ufjf.dcc025.encorecrossover.edata.EData;
 import br.ufjf.dcc025.encorecrossover.eengine.EScreen;
-import br.ufjf.dcc025.encorecrossover.eengine.EncoreEngine;
+import br.ufjf.dcc025.encorecrossover.eengine.EFight;
 
 /**
  *

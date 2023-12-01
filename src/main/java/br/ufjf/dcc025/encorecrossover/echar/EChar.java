@@ -1,8 +1,9 @@
 package br.ufjf.dcc025.encorecrossover.echar;
 
 import br.ufjf.dcc025.encorecrossover.eskill.*;
-import br.ufjf.dcc025.encorecrossover.euser.EAdmin;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -59,17 +60,20 @@ public class EChar {
         String string = name;
         string += "\nTeam=" + team;
         string += "\nHP=" + hp;
-        //only display skills off-cooldown
-        string += "\nSkills=[";
-        for(String key : skills.keySet()){
-            if(!skills.get(key).isOnCooldown())
-                string += key + ", ";
-        }
-        string = string.substring(0,string.length()-2);
-        string += "]";
+        //string += getSkillList();
         string += "\nEffects=" + effects.keySet();
         //string += "\nInventory=" + inventory.keySet();
         return string;
+    }
+
+    public List<String> getSkillList() {
+        List<String> list = new ArrayList<>();
+        //only display skills off-cooldown
+        for(String key : skills.keySet()){
+            if(!skills.get(key).isOnCooldown())
+                list.add(key);
+        }
+        return list;
     }
     public String getSkillInfo(String skill){
         String string = "Skill: ";
@@ -77,6 +81,14 @@ public class EChar {
             string += skills.get(skill).getDescription();
         else
             return null;
+        return string;
+    }
+    public String getProfile(){
+        String string = "Name: " + name + "\n";
+        string += "Skills:\n";
+        for(String s : skills.keySet()){
+            string += skills.get(s).getDescription() + "\n";
+        }
         return string;
     }
     //getEffects, getInventory
@@ -115,7 +127,6 @@ public class EChar {
         String log = name + " uses ";
         if(skills.containsKey(skill)){
             log += skill + " on " + target.getName() + ".";
-            
             log += "\n" + skills.get(skill).cast(target, effects);
         }
         else
@@ -147,6 +158,9 @@ public class EChar {
                 effects.remove(key);
                 string += name + " is no longer under the " + key + " effect.\n";
             }
+        }
+        for(String key : skills.keySet()){
+            skills.get(key).tickCooldown();
         }
         return string;
     }

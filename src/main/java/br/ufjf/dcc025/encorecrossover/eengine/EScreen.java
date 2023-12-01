@@ -219,6 +219,11 @@ public class EScreen extends javax.swing.JFrame {
             public String getElementAt(int i) { return strings[i]; }
         });
         historyList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        historyList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                historyListValueChanged(evt);
+            }
+        });
         jScrollPane3.setViewportView(historyList);
 
         historySplitPane.setLeftComponent(jScrollPane3);
@@ -227,7 +232,7 @@ public class EScreen extends javax.swing.JFrame {
         historyTextArea.setColumns(20);
         historyTextArea.setLineWrap(true);
         historyTextArea.setRows(5);
-        historyTextArea.setText("Selected Character's Information\n");
+        historyTextArea.setText("History");
         jScrollPane4.setViewportView(historyTextArea);
 
         historySplitPane.setRightComponent(jScrollPane4);
@@ -484,13 +489,17 @@ public class EScreen extends javax.swing.JFrame {
         // TODO add your handling code here:
         List<String> list = new ArrayList<>();
         list.addAll(user.getFavList());
-        String charList []= new String[list.size()];
+        String charList[]= new String[list.size()];
         for(int i = 0; i < list.size(); i++){
             charList[i] = list.get(i);
         }
         favCharList.setListData(charList);
-        
-        //list.clear(); gotta update the history list as well
+        List<String[]> list2 = new ArrayList<>();
+        list2.addAll(user.listHistory());
+        String histList[] = new String[list2.size()];
+        for(int i = 0; i < list2.size(); i++)
+            histList[i] = list2.get(i)[0];
+        historyList.setListData(histList);
     }//GEN-LAST:event_userPaneComponentShown
 
     private void favCharListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_favCharListValueChanged
@@ -579,6 +588,16 @@ public class EScreen extends javax.swing.JFrame {
         else
             selectedActionTextArea.setText("Choose Action");
     }//GEN-LAST:event_actionComboBoxItemStateChanged
+
+    private void historyListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_historyListValueChanged
+        // TODO add your handling code here:
+        if(historyList.getSelectedValue() == null){
+            historyTextArea.setText("");
+            return;
+        }
+        String hist = user.getHistory(historyList.getSelectedIndex());
+        historyTextArea.setText(hist);
+    }//GEN-LAST:event_historyListValueChanged
 
     /**
      * @param args the command line arguments

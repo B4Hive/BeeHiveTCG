@@ -20,7 +20,7 @@ public class EAdmin extends EUser {
         if(EUser.get("admin") == null){
             EUser.add(new EAdmin("admin", "admin"));
             for(String key : EChar.getCharList()){
-                EUser.get("admin").addFavChar(EChar.get(key));
+                EUser.get("admin").addFavChar(key);
             }
         }
         return EUser.get("admin");

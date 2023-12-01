@@ -42,6 +42,6 @@ public class EPlayer extends EUser {
     }
     @Override
     void sendRequest(String request) {
-        EUser.get("admin").addHistory(request);
+        //EUser.get("admin").addHistory(request);
     }
 }
