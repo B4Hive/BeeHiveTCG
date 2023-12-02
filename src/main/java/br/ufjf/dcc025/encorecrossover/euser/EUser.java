@@ -87,11 +87,8 @@ public abstract class EUser {
         }
     }
     
-    public abstract List<String> listOptions();
-    public abstract <T> void selectOption(String option, T obj);
-    
     public void addHistory(String[] string){
-        history.add(string);
+        history.add(0, string);
     }
     public String getHistory(int id){
         String string = "";
@@ -99,8 +96,8 @@ public abstract class EUser {
             string += s + "\n";
         return string;
     }
-    public void removeHistory(String[] content){
-        history.remove(content);
+    public void removeHistory(int id){
+        history.remove(id);
     }
     public List<String[]> listHistory(){
         List<String[]> list = new ArrayList<>();
@@ -119,36 +116,12 @@ public abstract class EUser {
     public void removeFavChar(String character){
         favChars.remove(character);
     }
+    public void sendRequest(String [] request){
+        EUser.get("admin").addHistory(request);
+    }
     
-    abstract void sendRequest(String request);
-    //WIP below
-    public void createChar(){
-        
-    }
-    public void createSkill(){
-        
-    }
-    public void addSkillToChar(String skill, String character){
-        
-    }
-    public void removeChar(){
-        
-    }
-    public void removeSkill(){
-        
-    }
-    public void removeSkillFromChar(String skill, String character){
-        
-    }
-    /**
-    public void createItem(){
-        
-    }
-    public void removeItem(String item){
-        
-    }
-    */
-    //WIP above
+    public abstract void confirmRequest(String request);
+    
     @Override
     public String toString() {
         String temp = getClass() + ":";

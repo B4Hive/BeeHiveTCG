@@ -1,7 +1,6 @@
 package br.ufjf.dcc025.encorecrossover.euser;
 
 import br.ufjf.dcc025.encorecrossover.echar.EChar;
-import java.util.List;
 
 /**
  *
@@ -25,18 +24,9 @@ public class EAdmin extends EUser {
         }
         return EUser.get("admin");
     }
-    
     @Override
-    public List<String> listOptions() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-    @Override
-    public <T> void selectOption(String option, T obj) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-    @Override
-    void sendRequest(String request) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void confirmRequest(String request) {
+        System.out.println("NYI EAdmin.confirmRequest()");
     }
     
 }

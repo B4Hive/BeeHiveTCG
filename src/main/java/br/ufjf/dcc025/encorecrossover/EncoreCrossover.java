@@ -2,7 +2,6 @@ package br.ufjf.dcc025.encorecrossover;
 
 import br.ufjf.dcc025.encorecrossover.edata.EData;
 import br.ufjf.dcc025.encorecrossover.eengine.EScreen;
-import br.ufjf.dcc025.encorecrossover.eengine.EFight;
 
 /**
  *
@@ -11,10 +10,10 @@ import br.ufjf.dcc025.encorecrossover.eengine.EFight;
 public class EncoreCrossover {
 
     public static void main(String[] args) {
+        //EData.importData();
+        EData.initBaseData();
         EScreen screen = new EScreen();
         screen.setVisible(true);
-        EData.initBaseData();
-        //EncoreEngine.newGame();
         EData.exportData();
     }
 }

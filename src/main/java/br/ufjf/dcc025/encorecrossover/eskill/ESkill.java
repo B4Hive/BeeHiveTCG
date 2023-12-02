@@ -42,13 +42,28 @@ public abstract class ESkill {
     
     //methods
     public static void init(){
-        skills.put("BATK", ESkillDMG.create("BATK", 3, 0));
-        skills.put("BHEAL", ESkillHeal.create("BHEAL", 3, 2));
-        skills.put("BDOT", ESkillEffect.create("BDOT", 1, 3, "DOT", 2));
-        skills.put("BHOT", ESkillEffect.create("BHOT", 1, 3, "HOT", 2));
-        skills.put("BBUFF", ESkillEffect.create("BBUFF", 1, 3, "DMG", 2));
     }
-    //import
+    
+    public static ESkill toESkill(String info){
+        ESkill ret = null;
+        if(info.contains(";"))
+            info = info.substring(0, info.length()-1);
+        String type[] = info.split(":");
+        switch(type[0]){
+            case "ESkillDMG" ->{
+                ret = ESkillDMG.toESkillDMG(type[1]);
+            }
+            case "ESkillHeal" ->{
+                ret = ESkillHeal.toESkillHeal(type[1]);
+            }
+            case "ESkillEffect" ->{
+                ret = ESkillEffect.toESkillEffect(type[1]);
+            }
+        }
+        ESkill.add(ret);
+        return ret;
+    }
+    
     public static String export(){
         String string = "";
         for(String key : skills.keySet()){
@@ -57,11 +72,11 @@ public abstract class ESkill {
         return string;
     }
     
-    static void add(String key, ESkill object){
-        skills.put(key, object);
+    static void add(ESkill object){
+        skills.put(object.getName(), object);
     }
     public static ESkill get(String key){
-        return skills.get(key);
+        return skills.get(key);//.clone();
     }
     
     public void startCooldown(){
@@ -98,7 +113,12 @@ public abstract class ESkill {
         temp += ";\n";
         return  temp;
     }
-    
+    /**
+    @Override
+    protected ESkill clone(){
+        return stringToESkill(toString());
+    }
+    */
 }
 /*
 Attributes{

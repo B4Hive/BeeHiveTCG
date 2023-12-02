@@ -33,12 +33,11 @@ public class EChar {
     }
     public static EChar createTemplate(String name){
         Map<String,ESkill> tempKit = new HashMap<>();
-        //BDOT, BHOT, BBUFF, BATK, BHEAL
-        tempKit.put("BATK", ESkill.get("BATK"));
-        tempKit.put("BHEAL", ESkill.get("BHEAL"));
-        tempKit.put("BHOT", ESkill.get("BHOT"));
-        tempKit.put("BDOT", ESkill.get("BDOT"));
-        tempKit.put("BBUFF", ESkill.get("BBUFF"));
+        tempKit.put(name+" ATK", ESkillDMG.create(name+" ATK",3,0));
+        tempKit.put(name+" HEAL", ESkillHeal.create(name+" HEAL",3,2));
+        tempKit.put(name+" HOT", ESkillEffect.create(name+" HOT",1,3,"HOT",2));
+        tempKit.put(name+" DOT", ESkillEffect.create(name+" DOT",1,3,"DOT",2));
+        tempKit.put(name+" BUFF", ESkillEffect.create(name+" BUFF",1,3,"DMG",2));
         characters.put(name, new EChar(name, tempKit));
         return characters.get(name);
     }
@@ -141,6 +140,7 @@ public class EChar {
     }
     public String updateEffects(){
         String string = "";
+        List<String> removeList = new ArrayList<>();
         for(String key : effects.keySet()){
             if(effects.get(key).tick()){
                 if(effects.get(key).getType().equals("DOT")){
@@ -154,10 +154,12 @@ public class EChar {
                     string += " HP from " + key + ".\n";
                 }
             }
-            else{
-                effects.remove(key);
-                string += name + " is no longer under the " + key + " effect.\n";
-            }
+            else
+                removeList.add(key);
+        }
+        for(String key : removeList){
+            effects.remove(key);
+            string += name + " is no longer under the " + key + " effect.\n";
         }
         for(String key : skills.keySet()){
             skills.get(key).tickCooldown();

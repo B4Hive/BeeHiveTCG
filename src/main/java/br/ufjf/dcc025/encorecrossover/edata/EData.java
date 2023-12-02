@@ -21,10 +21,10 @@ public class EData {
     private static Scanner openInputFile(String name) throws FileNotFoundException{
         return new Scanner(new FileReader(name)).useDelimiter(";\n");
     }
-    public static boolean importData(){
+    public static boolean importData(String fileName){
         Scanner file;
         try{
-            file = openInputFile("EncoreData.txt");
+            file = openInputFile(fileName);
         }
         catch(FileNotFoundException e){
             System.out.println("File not found. Contact admin.");
@@ -33,17 +33,21 @@ public class EData {
         }
         while(file.hasNext()){
             String line = file.next();
-            String splitLine[] = line.split(":",2);
-            switch(splitLine[0]){
+            if(line.contains("ESkill")){
+                ESkill.toESkill(line);
+            }
+            else if(line.contains("EChar")){
+                
+            }
+            else if(line.contains("EUser")){
                 
             }
         }
         return true;
     }
     
-    private static FileWriter openOutFile() throws IOException {
-        String path = "EncoreData.txt";
-        return new FileWriter(path);
+    private static FileWriter openOutFile(String fileName) throws IOException {
+        return new FileWriter(fileName);
     }
     private static void writeOut(FileWriter fOut, String compiledData) throws IOException {
         try (fOut) {
@@ -53,25 +57,58 @@ public class EData {
     }
     public static boolean exportData(){
         FileWriter fOut;
+        
         try{
-            fOut = openOutFile();
+            fOut = openOutFile("ESkill.txt");
         }
         catch(IOException e){
-            System.out.println("openOutFile failed.");
+            System.out.println("EData.openOutFile() failed.");
             return false;
         }
         String compiledData = "";
-        //read every object and save it on compiledData
         compiledData += ESkill.export();
+        try{
+            writeOut(fOut, compiledData);
+        }
+        catch(IOException e){
+            System.out.println("EData.writeOut() failed.");
+            return false;
+        }
+        
+        try{
+            fOut = openOutFile("EChar.txt");
+        }
+        catch(IOException e){
+            System.out.println("EData.openOutFile() failed.");
+            return false;
+        }
+        compiledData = "";
         compiledData += EChar.export();
+        try{
+            writeOut(fOut, compiledData);
+        }
+        catch(IOException e){
+            System.out.println("EData.writeOut() failed.");
+            return false;
+        }
+        
+        try{
+            fOut = openOutFile("EUser.txt");
+        }
+        catch(IOException e){
+            System.out.println("EData.openOutFile() failed.");
+            return false;
+        }
+        compiledData = "";
         compiledData += EUser.export();
         try{
             writeOut(fOut, compiledData);
         }
         catch(IOException e){
-            System.out.println("writeOut failed.");
+            System.out.println("EData.writeOut() failed.");
             return false;
         }
+        
         return true;
     }
     

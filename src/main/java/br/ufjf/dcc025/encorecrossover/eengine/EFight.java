@@ -3,6 +3,7 @@ package br.ufjf.dcc025.encorecrossover.eengine;
 import br.ufjf.dcc025.encorecrossover.echar.EChar;
 import br.ufjf.dcc025.encorecrossover.euser.EUser;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -62,16 +63,20 @@ public class EFight {
         return hist;
     }
     public String IA(){
-        //
-        return "";
+        String ia = "\n";
+        List<String> action = char2.getSkillList();
+        int id = (int) Math.round(Math.random() * (action.size()-1));
+        //shit ton of conditionals to actually choose the target instead of randombulshitgo
+        ia += char2.cast(action.get(id), char1);
+        return ia;
     }
     public boolean end(){
         if(char1.getHP() <= 0 || char2.getHP() <= 0){
             history.add("Fight ended.");
             if(char1.getHP() > char2.getHP())
-                history.add(0, "Victory");
+                history.add(0, "Victory [" + new Date().toString() + "]");
             else
-                history.add(0,"Defeat");
+                history.add(0, "Defeat [" + new Date().toString() + "]");
             String result[] = new String[history.size()];
             for(int i = 0; i < history.size(); i++)
                 result[i] = history.get(i);

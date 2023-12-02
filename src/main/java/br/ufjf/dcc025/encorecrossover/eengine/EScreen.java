@@ -9,7 +9,6 @@ import br.ufjf.dcc025.encorecrossover.edata.EData;
 import br.ufjf.dcc025.encorecrossover.eskill.ESkill;
 import br.ufjf.dcc025.encorecrossover.euser.EPlayer;
 import br.ufjf.dcc025.encorecrossover.euser.EUser;
-import static java.awt.event.KeyEvent.VK_ENTER;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -39,6 +38,23 @@ public class EScreen extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         layeredPane = new javax.swing.JLayeredPane();
+        characterPane = new javax.swing.JPanel();
+        characterTabbedPane = new javax.swing.JTabbedPane();
+        characterInternalPane = new javax.swing.JPanel();
+        characterToolBar = new javax.swing.JToolBar();
+        favoriteButton = new javax.swing.JButton();
+        createCharButton = new javax.swing.JButton();
+        removeCharButton = new javax.swing.JButton();
+        jSplitPane1 = new javax.swing.JSplitPane();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        characterList = new javax.swing.JList<>();
+        jScrollPane12 = new javax.swing.JScrollPane();
+        characterTextArea = new javax.swing.JTextArea();
+        jPanel2 = new javax.swing.JPanel();
+        jToolBar2 = new javax.swing.JToolBar();
+        jButton5 = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
+        jButton8 = new javax.swing.JButton();
         userPane = new javax.swing.JPanel();
         userTabbedPane = new javax.swing.JTabbedPane();
         userCharPanel = new javax.swing.JPanel();
@@ -90,6 +106,7 @@ public class EScreen extends javax.swing.JFrame {
         editUserMenu = new javax.swing.JMenu();
         editNameMenuItem = new javax.swing.JMenuItem();
         editPasswordMenuItem = new javax.swing.JMenuItem();
+        logoutMenuItem = new javax.swing.JMenuItem();
         skillsMenu = new javax.swing.JMenu();
         listSkillsMenuItem = new javax.swing.JMenuItem();
         createSkillMenuItem = new javax.swing.JMenuItem();
@@ -112,9 +129,95 @@ public class EScreen extends javax.swing.JFrame {
             }
         });
 
-        layeredPane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Made by BeeHive", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.ABOVE_BOTTOM, new java.awt.Font("Segoe Script", 1, 12))); // NOI18N
+        layeredPane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Made by BeeHive", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.ABOVE_BOTTOM, new java.awt.Font("Segoe Script", 1, 10))); // NOI18N
         layeredPane.setPreferredSize(new java.awt.Dimension(870, 440));
         layeredPane.setLayout(new javax.swing.OverlayLayout(layeredPane));
+
+        characterPane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Characters", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
+        characterPane.setLayout(new java.awt.BorderLayout());
+
+        characterTabbedPane.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+
+        characterInternalPane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "pane"));
+        characterInternalPane.setLayout(new java.awt.BorderLayout());
+
+        characterToolBar.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Options", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
+        characterToolBar.setRollover(true);
+
+        favoriteButton.setText("Add to Favorite");
+        favoriteButton.setFocusable(false);
+        favoriteButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        favoriteButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        characterToolBar.add(favoriteButton);
+
+        createCharButton.setText("Create New");
+        createCharButton.setFocusable(false);
+        createCharButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        createCharButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        characterToolBar.add(createCharButton);
+
+        removeCharButton.setText("Remove");
+        removeCharButton.setFocusable(false);
+        removeCharButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        removeCharButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        characterToolBar.add(removeCharButton);
+
+        characterInternalPane.add(characterToolBar, java.awt.BorderLayout.PAGE_END);
+
+        characterList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Character 1", "Character 2", "Character 3", "Character 4", "Character 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        characterList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jScrollPane11.setViewportView(characterList);
+
+        jSplitPane1.setLeftComponent(jScrollPane11);
+
+        characterTextArea.setEditable(false);
+        characterTextArea.setColumns(20);
+        characterTextArea.setLineWrap(true);
+        characterTextArea.setRows(5);
+        characterTextArea.setText("character info\n");
+        jScrollPane12.setViewportView(characterTextArea);
+
+        jSplitPane1.setRightComponent(jScrollPane12);
+
+        characterInternalPane.add(jSplitPane1, java.awt.BorderLayout.CENTER);
+
+        characterTabbedPane.addTab("Characters", characterInternalPane);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "pane"));
+        jPanel2.setLayout(new java.awt.BorderLayout());
+
+        jToolBar2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Options"));
+        jToolBar2.setRollover(true);
+
+        jButton5.setText("jButton5");
+        jButton5.setFocusable(false);
+        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar2.add(jButton5);
+
+        jButton7.setText("jButton7");
+        jButton7.setFocusable(false);
+        jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar2.add(jButton7);
+
+        jButton8.setText("jButton8");
+        jButton8.setFocusable(false);
+        jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jButton8.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jToolBar2.add(jButton8);
+
+        jPanel2.add(jToolBar2, java.awt.BorderLayout.PAGE_END);
+
+        characterTabbedPane.addTab("Skills", jPanel2);
+
+        characterPane.add(characterTabbedPane, java.awt.BorderLayout.CENTER);
+
+        layeredPane.add(characterPane);
 
         userPane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "User", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
         userPane.setForeground(new java.awt.Color(102, 102, 102));
@@ -127,7 +230,7 @@ public class EScreen extends javax.swing.JFrame {
 
         userTabbedPane.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        userCharPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        userCharPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "pane"));
         userCharPanel.setLayout(new java.awt.BorderLayout());
 
         favCharSplitPane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Favorite Characters"));
@@ -190,7 +293,7 @@ public class EScreen extends javax.swing.JFrame {
 
         userTabbedPane.addTab("New Game", userCharPanel);
 
-        userHistoryPanel.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        userHistoryPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "pane"));
         userHistoryPanel.setLayout(new java.awt.BorderLayout());
 
         historyToolBar.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Options"));
@@ -200,12 +303,22 @@ public class EScreen extends javax.swing.JFrame {
         historyConfirmButton.setFocusable(false);
         historyConfirmButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         historyConfirmButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        historyConfirmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                historyConfirmButtonActionPerformed(evt);
+            }
+        });
         historyToolBar.add(historyConfirmButton);
 
         historyRemoveButton.setText("Remove");
         historyRemoveButton.setFocusable(false);
         historyRemoveButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         historyRemoveButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        historyRemoveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                historyRemoveButtonActionPerformed(evt);
+            }
+        });
         historyToolBar.add(historyRemoveButton);
 
         userHistoryPanel.add(historyToolBar, java.awt.BorderLayout.PAGE_END);
@@ -395,6 +508,9 @@ public class EScreen extends javax.swing.JFrame {
         editUserMenu.add(editPasswordMenuItem);
 
         userMenu.add(editUserMenu);
+
+        logoutMenuItem.setText("LogOut");
+        userMenu.add(logoutMenuItem);
 
         jMenuBar1.add(userMenu);
 
@@ -599,6 +715,21 @@ public class EScreen extends javax.swing.JFrame {
         historyTextArea.setText(hist);
     }//GEN-LAST:event_historyListValueChanged
 
+    private void historyRemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historyRemoveButtonActionPerformed
+        // TODO add your handling code here:
+        if(JOptionPane.showConfirmDialog(
+                layeredPane, "Remove history from List?",
+                "Remove", 0) == 1)
+            return;
+        user.removeHistory(historyList.getSelectedIndex());
+        userPaneComponentShown(null);
+    }//GEN-LAST:event_historyRemoveButtonActionPerformed
+
+    private void historyConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historyConfirmButtonActionPerformed
+        // TODO add your handling code here:
+        user.confirmRequest(user.getHistory(historyList.getSelectedIndex()));
+    }//GEN-LAST:event_historyConfirmButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -642,7 +773,14 @@ public class EScreen extends javax.swing.JFrame {
     private javax.swing.JLabel actionLabel;
     private javax.swing.JButton addCharButton;
     private javax.swing.JToolBar charListToolBar;
+    private javax.swing.JPanel characterInternalPane;
+    private javax.swing.JList<String> characterList;
+    private javax.swing.JPanel characterPane;
+    private javax.swing.JTabbedPane characterTabbedPane;
+    private javax.swing.JTextArea characterTextArea;
+    private javax.swing.JToolBar characterToolBar;
     private javax.swing.JButton createButton;
+    private javax.swing.JButton createCharButton;
     private javax.swing.JMenuItem createSkillMenuItem;
     private javax.swing.JMenuItem editNameMenuItem;
     private javax.swing.JMenuItem editPasswordMenuItem;
@@ -650,6 +788,7 @@ public class EScreen extends javax.swing.JFrame {
     private javax.swing.JButton executeButton;
     private javax.swing.JList<String> favCharList;
     private javax.swing.JSplitPane favCharSplitPane;
+    private javax.swing.JButton favoriteButton;
     private javax.swing.JPanel gamePane;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenuItem helpMenuItem;
@@ -664,9 +803,15 @@ public class EScreen extends javax.swing.JFrame {
     private javax.swing.JTextArea inGameCharTextArea2;
     private javax.swing.JPanel inGameStatsPanel;
     private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane11;
+    private javax.swing.JScrollPane jScrollPane12;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -674,15 +819,19 @@ public class EScreen extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JToolBar jToolBar2;
     private javax.swing.JLayeredPane layeredPane;
     private javax.swing.JMenuItem listSkillsMenuItem;
     private javax.swing.JButton loginButton;
     private javax.swing.JPanel loginInnerPanel;
     private javax.swing.JPanel loginPane;
     private javax.swing.JLabel loginPaneLabel;
+    private javax.swing.JMenuItem logoutMenuItem;
     private javax.swing.JButton newGameButton;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;
+    private javax.swing.JButton removeCharButton;
     private javax.swing.JButton removeCharacterButton;
     private javax.swing.JTextArea selectedActionTextArea;
     private javax.swing.JTextArea selectedCharTextArea;

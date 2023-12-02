@@ -9,11 +9,11 @@ import java.util.Map;
  */
 public class ESkillDMG extends ESkill {
     //constructor
-    private ESkillDMG(String name, int value, int cooldown) {
+    ESkillDMG(String name, int value, int cooldown) {
         super(name, value, cooldown);
     }
     public static ESkill create(String name, int value, int cooldown){
-        ESkill.add(name, new ESkillDMG(name, value, cooldown));
+        ESkill.add(new ESkillDMG(name, value, cooldown));
         return ESkill.get(name);
     }
     //methods
@@ -44,5 +44,25 @@ public class ESkillDMG extends ESkill {
         }
         return bonus;
     }
-    
+    static ESkill toESkillDMG(String info){
+        String n = "";
+        int v = 0;
+        int c = 0;
+        String attributeSplit[] = info.split(", ");
+        for(String attribute : attributeSplit){
+            String temp[] = attribute.split("=");
+            switch(temp[0]){
+                case "name" -> {
+                    n = temp[1];
+                }
+                case "value" -> {
+                    v = Integer.parseInt(temp[1]);
+                }
+                case "cooldown" -> {
+                    c = Integer.parseInt(temp[1]);
+                }
+            }
+        }
+        return new ESkillDMG(n, v, c);
+    }
 }

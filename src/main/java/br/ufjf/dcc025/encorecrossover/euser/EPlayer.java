@@ -23,25 +23,9 @@ public class EPlayer extends EUser {
     }
     
     //methods
+    @Override
+    public void confirmRequest(String request) {
+        //this does nothing on the EPlayer
+    }
     
-    @Override
-    public List<String> listOptions() {
-        List<String> options = new ArrayList<>();
-        options.add("Add Favorite Character");
-        options.add("List Favorite Characters");
-        
-        return options;
-    }
-    @Override
-    public <T> void selectOption(String option, T obj) {
-        switch(option){
-            case "List Favorite Characters" -> {
-                
-            }
-        }
-    }
-    @Override
-    void sendRequest(String request) {
-        //EUser.get("admin").addHistory(request);
-    }
 }

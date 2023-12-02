@@ -14,14 +14,14 @@ public class ESkillEffect extends ESkill {
     private int duration;
     
     //constructor
-    private ESkillEffect(String name, int value, int cooldown) {
+    ESkillEffect(String name, int value, int cooldown) {
         super(name, value, cooldown);
     }
     public static ESkill create(String name, int value, int cooldown, String type, int duration) {
         ESkillEffect temp = new ESkillEffect(name, value, cooldown);
         temp.effect = EEffect.create(name, type, value);
         temp.duration = duration;
-        ESkill.add(name, temp);
+        ESkill.add(temp);
         return ESkill.get(name);
     }
     
@@ -62,6 +62,39 @@ public class ESkillEffect extends ESkill {
         temp += ", duration=" + duration;
         temp += ";\n";
         return  temp;
+    }
+    
+    static ESkill toESkillEffect(String info){
+        String n = "";
+        int v = 0;
+        int c = 0;
+        String e = "";
+        int d = 0;
+        String attributeSplit[] = info.split(", ");
+        for(String attribute : attributeSplit){
+            String temp[] = attribute.split("=");
+            switch(temp[0]){
+                case "name" -> {
+                    n = temp[1];
+                }
+                case "value" -> {
+                    v = Integer.parseInt(temp[1]);
+                }
+                case "cooldown" -> {
+                    c = Integer.parseInt(temp[1]);
+                }
+                case "effect" -> {
+                    e = temp[1];
+                }
+                case "duration" -> {
+                    d = Integer.parseInt(temp[1]);
+                }
+            }
+        }
+        ESkillEffect temp = new ESkillEffect(n,v,c);
+        temp.effect = EEffect.create(n, e, v);
+        temp.duration = d;
+        return temp;
     }
     
 }
