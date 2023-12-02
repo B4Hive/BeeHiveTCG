@@ -1,6 +1,7 @@
 package br.ufjf.dcc025.encorecrossover.euser;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -36,7 +37,6 @@ public abstract class EUser {
         EAdmin.initAdmin();
         EPlayer.create("default", "default");
     }
-    //import
     public static String export(){
         String string = "";
         for(String key : users.keySet()){
@@ -88,6 +88,13 @@ public abstract class EUser {
     }
     
     public void addHistory(String[] string){
+        String date = new Date().toString();
+        String split[] = date.split(":");
+        split[2] = split[2].replaceFirst(" ", "s ");
+        date = split[0] + "h" + split[1] + "m" + split[2];
+        string[0] = string[0] + " [" + date + "]";
+        string[0] = string[0].replaceFirst(":", "h");
+        string[0] = string[0].replaceFirst(":", "m");
         history.add(0, string);
     }
     public String getHistory(int id){
@@ -122,6 +129,47 @@ public abstract class EUser {
     
     public abstract void confirmRequest(String request);
     
+    public static void toEUser(String info){
+        String n = "";
+        String p = "";
+        List<String[]> h = new ArrayList<>();
+        Set<String> fc = new HashSet<>();
+        EUser ret = null;
+        String type[] = info.split(":");
+        String attributeSplit[] = type[1].split(", ");
+        for(String attribute : attributeSplit){
+            String temp[] = attribute.split("=");
+            switch(temp[0]){
+                case "name" -> {
+                    n = temp[1];
+                }
+                case "password" -> {
+                    p = temp[1];
+                }
+                case "favChars" -> {
+                    if(temp.length > 1){
+                        String cArr[] = temp[1].split("/");
+                        for(String a : cArr)
+                            fc.add(a);
+                    }
+                }
+                case "history" -> {
+                    if(temp.length > 1){
+                        String hArr[] = temp[1].split("/");
+                        for(String a : hArr){
+                            h.add(a.split("@"));
+                        }
+                    }
+                }
+            }
+        }
+        if(type[0].equals("EAdmin"))
+            ret = EAdmin.initAdmin();
+        else //if(type[0].equals("EPlayer"))
+            ret = EPlayer.create(n, p);
+        ret.history.addAll(h);
+        ret.favChars.addAll(fc);
+    }
     @Override
     public String toString() {
         String temp = getClass() + ":";
@@ -129,10 +177,21 @@ public abstract class EUser {
         temp = split[split.length - 1];
         temp += "name=" + name;
         temp += ", password=" + password; //quero cripografar essa parte
-        temp += ", favChars=[";
+        temp += ", favChars=";
         for(String f : favChars)
             temp += f + "/";
-        temp += temp.substring(0, temp.length()-1) + "]";
+        if(temp.charAt(temp.length()-1) == '/')
+            temp = temp.substring(0, temp.length()-1);
+        temp += ", history=";
+        for(String hist[] : history){
+            for(String h : hist)
+                temp += h + "@";
+            if(temp.charAt(temp.length()-1) == '@')
+                temp = temp.substring(0, temp.length()-1);
+            temp += "/";
+        }
+        if(temp.charAt(temp.length()-1) == '/')
+            temp = temp.substring(0, temp.length()-1);
         temp += ";\n";
         return  temp;
     }

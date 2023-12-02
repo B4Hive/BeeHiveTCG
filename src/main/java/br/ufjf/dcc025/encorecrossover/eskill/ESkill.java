@@ -44,26 +44,6 @@ public abstract class ESkill {
     public static void init(){
     }
     
-    public static ESkill toESkill(String info){
-        ESkill ret = null;
-        if(info.contains(";"))
-            info = info.substring(0, info.length()-1);
-        String type[] = info.split(":");
-        switch(type[0]){
-            case "ESkillDMG" ->{
-                ret = ESkillDMG.toESkillDMG(type[1]);
-            }
-            case "ESkillHeal" ->{
-                ret = ESkillHeal.toESkillHeal(type[1]);
-            }
-            case "ESkillEffect" ->{
-                ret = ESkillEffect.toESkillEffect(type[1]);
-            }
-        }
-        ESkill.add(ret);
-        return ret;
-    }
-    
     public static String export(){
         String string = "";
         for(String key : skills.keySet()){
@@ -101,7 +81,25 @@ public abstract class ESkill {
     
     public abstract String getDescription();
     public abstract String cast(EChar target, Map<String,EEffect> effects);
-
+    
+    public static void toESkill(String info){
+        ESkill ret = null;
+        if(info.contains(";"))
+            info = info.substring(0, info.length()-1);
+        String type[] = info.split(":");
+        switch(type[0]){
+            case "ESkillDMG" ->{
+                ret = ESkillDMG.toESkillDMG(type[1]);
+            }
+            case "ESkillHeal" ->{
+                ret = ESkillHeal.toESkillHeal(type[1]);
+            }
+            case "ESkillEffect" ->{
+                ret = ESkillEffect.toESkillEffect(type[1]);
+            }
+        }
+        ESkill.add(ret);
+    }
     @Override
     public String toString() {
         String temp = getClass() + ":";
@@ -113,6 +111,7 @@ public abstract class ESkill {
         temp += ";\n";
         return  temp;
     }
+    
     /**
     @Override
     protected ESkill clone(){

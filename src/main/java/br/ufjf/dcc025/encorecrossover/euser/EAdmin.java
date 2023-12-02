@@ -28,5 +28,11 @@ public class EAdmin extends EUser {
     public void confirmRequest(String request) {
         System.out.println("NYI EAdmin.confirmRequest()");
     }
+    public static void reportError(String error){
+        String request[] = new String [2];
+        request[0] = "Error";
+        request[1] = error;
+        EUser.get("admin").sendRequest(request);
+    }
     
 }

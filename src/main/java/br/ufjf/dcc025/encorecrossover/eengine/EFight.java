@@ -74,9 +74,9 @@ public class EFight {
         if(char1.getHP() <= 0 || char2.getHP() <= 0){
             history.add("Fight ended.");
             if(char1.getHP() > char2.getHP())
-                history.add(0, "Victory [" + new Date().toString() + "]");
+                history.add(0, "Victory");
             else
-                history.add(0, "Defeat [" + new Date().toString() + "]");
+                history.add(0, "Defeat");
             String result[] = new String[history.size()];
             for(int i = 0; i < history.size(); i++)
                 result[i] = history.get(i);

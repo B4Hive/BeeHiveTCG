@@ -1,8 +1,5 @@
 package br.ufjf.dcc025.encorecrossover.euser;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author b4bru

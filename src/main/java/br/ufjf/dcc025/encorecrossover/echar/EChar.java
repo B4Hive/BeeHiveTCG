@@ -41,6 +41,10 @@ public class EChar {
         characters.put(name, new EChar(name, tempKit));
         return characters.get(name);
     }
+    static void add(EChar object){
+        characters.put(object.getName(), object);
+    }
+    //getters
     public static EChar get(String name){
         return characters.get(name);
     }
@@ -48,7 +52,6 @@ public class EChar {
         return characters.keySet();
     }
     
-    //getters
     public String getName() {
         return name;
     }
@@ -166,6 +169,30 @@ public class EChar {
         }
         return string;
     }
+    
+    public static void toEChar(String info){
+        String n = "";
+        Map<String,ESkill> skills = new HashMap<>();
+        EChar ret = null;
+        String type[] = info.split(":");
+        String attributeSplit[] = type[1].split(", ");
+        for(String attribute : attributeSplit){
+            String temp[] = attribute.split("=");
+            switch(temp[0]){
+                case "name" -> {
+                    n = temp[1];
+                }
+                case "skills" -> {
+                    String skill[] = temp[1].split("/");
+                    for(String s : skill){
+                        skills.put(s, ESkill.get(s));
+                    }
+                }
+            }
+        }
+        ret = new EChar(n, skills);
+        EChar.add(ret);
+    }
     @Override
     public String toString() {
         String temp = getClass() + ":";
@@ -175,7 +202,6 @@ public class EChar {
         temp += ", skills=";//skills.keySet();
         for(String key : skills.keySet())
             temp += key + "/";
-        temp = temp.substring(0, temp.length()-1);
         temp += ";\n";
         return temp;
     }

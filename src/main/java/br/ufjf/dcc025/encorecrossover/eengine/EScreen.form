@@ -156,6 +156,9 @@
           <Dimension value="[870, 440]"/>
         </Property>
       </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="loginPane.setVisible(true);&#xd;&#xa;userPane.setVisible(false);&#xd;&#xa;gamePane.setVisible(false);&#xd;&#xa;characterPane.setVisible(false);  "/>
+      </AuxValues>
       <SubComponents>
         <Container class="javax.swing.JPanel" name="characterPane">
           <Properties>
@@ -939,9 +942,6 @@
               </Border>
             </Property>
           </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_LayoutCodePost" type="java.lang.String" value="loginPane.setVisible(true);&#xa;userPane.setVisible(false);&#xa;gamePane.setVisible(false);"/>
-          </AuxValues>
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
           <SubComponents>

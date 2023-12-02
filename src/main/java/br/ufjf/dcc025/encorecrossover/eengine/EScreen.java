@@ -131,6 +131,10 @@ public class EScreen extends javax.swing.JFrame {
 
         layeredPane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Made by BeeHive", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.ABOVE_BOTTOM, new java.awt.Font("Segoe Script", 1, 10))); // NOI18N
         layeredPane.setPreferredSize(new java.awt.Dimension(870, 440));
+        loginPane.setVisible(true);
+        userPane.setVisible(false);
+        gamePane.setVisible(false);
+        characterPane.setVisible(false);
         layeredPane.setLayout(new javax.swing.OverlayLayout(layeredPane));
 
         characterPane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Characters", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
@@ -485,10 +489,6 @@ public class EScreen extends javax.swing.JFrame {
         loginInnerPanel.add(createButton);
 
         loginPane.add(loginInnerPanel, java.awt.BorderLayout.PAGE_END);
-
-        loginPane.setVisible(true);
-        userPane.setVisible(false);
-        gamePane.setVisible(false);
 
         layeredPane.add(loginPane);
 

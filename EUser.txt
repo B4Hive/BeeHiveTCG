@@ -1,2 +1,2 @@
-EPlayer:name=default, password=default, favChars=[EPlayer:name=default, password=default, favChars=];
-EAdmin:name=admin, password=admin, favChars=[NPC/PC/EAdmin:name=admin, password=admin, favChars=[NPC/PC];
+EPlayer:name=default, password=default, favChars=, history=;
+EAdmin:name=admin, password=admin, favChars=NPC/PC, history=;

@@ -10,11 +10,9 @@ import br.ufjf.dcc025.encorecrossover.eengine.EScreen;
 public class EncoreCrossover {
 
     public static void main(String[] args) {
-        //EData.importData();
-        EData.initBaseData();
+        EData.importData();
         EScreen screen = new EScreen();
         screen.setVisible(true);
-        EData.exportData();
     }
 }
 /*
