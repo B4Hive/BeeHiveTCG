@@ -1,2 +1,2 @@
-EPlayer:name=default, password=default, favChars=, history=;
+EPlayer:name=BeeHive, password=b2r18u21, favChars=PC, history=;
 EAdmin:name=admin, password=admin, favChars=NPC/PC, history=;

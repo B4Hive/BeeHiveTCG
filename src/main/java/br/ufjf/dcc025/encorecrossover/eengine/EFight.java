@@ -3,7 +3,6 @@ package br.ufjf.dcc025.encorecrossover.eengine;
 import br.ufjf.dcc025.encorecrossover.echar.EChar;
 import br.ufjf.dcc025.encorecrossover.euser.EUser;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**

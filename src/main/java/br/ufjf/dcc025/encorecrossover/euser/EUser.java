@@ -35,7 +35,6 @@ public abstract class EUser {
     //methods
     public static void init(){
         EAdmin.initAdmin();
-        EPlayer.create("default", "default");
     }
     public static String export(){
         String string = "";

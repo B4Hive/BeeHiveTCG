@@ -22,7 +22,12 @@ public class EPlayer extends EUser {
     //methods
     @Override
     public void confirmRequest(String request) {
-        //this does nothing on the EPlayer
+        
+        String req[] = new String [2];
+        req[0] = "Request";
+        req[1] = request;
+        EUser.get("admin").sendRequest(req);
+        
     }
     
 }

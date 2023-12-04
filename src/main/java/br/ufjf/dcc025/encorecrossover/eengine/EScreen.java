@@ -7,6 +7,7 @@ package br.ufjf.dcc025.encorecrossover.eengine;
 import br.ufjf.dcc025.encorecrossover.echar.EChar;
 import br.ufjf.dcc025.encorecrossover.edata.EData;
 import br.ufjf.dcc025.encorecrossover.eskill.ESkill;
+import br.ufjf.dcc025.encorecrossover.euser.EAdmin;
 import br.ufjf.dcc025.encorecrossover.euser.EPlayer;
 import br.ufjf.dcc025.encorecrossover.euser.EUser;
 import java.util.ArrayList;
@@ -38,23 +39,60 @@ public class EScreen extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         layeredPane = new javax.swing.JLayeredPane();
+        skillPane = new javax.swing.JPanel();
+        skillCharNamePane = new javax.swing.JPanel();
+        charNameTextField = new javax.swing.JTextField();
+        skillSplitPane = new javax.swing.JSplitPane();
+        skillListPane = new javax.swing.JPanel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        skillList = new javax.swing.JList<>();
+        skillStatPane = new javax.swing.JPanel();
+        skillNameLabel = new javax.swing.JLabel();
+        skillNameTextField = new javax.swing.JTextField();
+        skillTypeLabel = new javax.swing.JLabel();
+        skillTypeComboBox = new javax.swing.JComboBox<>();
+        skillValueLabel = new javax.swing.JLabel();
+        skillValueSpinner = new javax.swing.JSpinner();
+        skillCooldownLabel = new javax.swing.JLabel();
+        skillCooldownSpinner = new javax.swing.JSpinner();
+        skillStatEffectLabel = new javax.swing.JLabel();
+        skillEffectComboBox = new javax.swing.JComboBox<>();
+        skillDurationLabel = new javax.swing.JLabel();
+        skillDurationSpinner = new javax.swing.JSpinner();
+        skillToolBar = new javax.swing.JToolBar();
+        newSkillButton = new javax.swing.JButton();
+        saveSkillButton = new javax.swing.JButton();
+        removeSkillButton = new javax.swing.JButton();
+        confirmChangeButton = new javax.swing.JButton();
+        discardChangeButton = new javax.swing.JButton();
         characterPane = new javax.swing.JPanel();
-        characterTabbedPane = new javax.swing.JTabbedPane();
-        characterInternalPane = new javax.swing.JPanel();
         characterToolBar = new javax.swing.JToolBar();
-        favoriteButton = new javax.swing.JButton();
+        favCharButton = new javax.swing.JButton();
+        editCharButton = new javax.swing.JButton();
         createCharButton = new javax.swing.JButton();
         removeCharButton = new javax.swing.JButton();
-        jSplitPane1 = new javax.swing.JSplitPane();
+        backToUserButton = new javax.swing.JButton();
+        charSplitPane = new javax.swing.JSplitPane();
         jScrollPane11 = new javax.swing.JScrollPane();
         characterList = new javax.swing.JList<>();
         jScrollPane12 = new javax.swing.JScrollPane();
         characterTextArea = new javax.swing.JTextArea();
-        jPanel2 = new javax.swing.JPanel();
-        jToolBar2 = new javax.swing.JToolBar();
-        jButton5 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        gamePane = new javax.swing.JPanel();
+        inGameActionPanel = new javax.swing.JPanel();
+        actionLabel = new javax.swing.JLabel();
+        actionComboBox = new javax.swing.JComboBox<>();
+        targetLabel = new javax.swing.JLabel();
+        targetComboBox = new javax.swing.JComboBox<>();
+        executeButton = new javax.swing.JButton();
+        inGameStatsPanel = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        inGameCharTextArea1 = new javax.swing.JTextArea();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        selectedActionTextArea = new javax.swing.JTextArea();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        inGameCharTextArea2 = new javax.swing.JTextArea();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        turnSummaryTextArea = new javax.swing.JTextArea();
         userPane = new javax.swing.JPanel();
         userTabbedPane = new javax.swing.JTabbedPane();
         userCharPanel = new javax.swing.JPanel();
@@ -76,22 +114,6 @@ public class EScreen extends javax.swing.JFrame {
         historyList = new javax.swing.JList<>();
         jScrollPane4 = new javax.swing.JScrollPane();
         historyTextArea = new javax.swing.JTextArea();
-        gamePane = new javax.swing.JPanel();
-        inGameActionPanel = new javax.swing.JPanel();
-        actionLabel = new javax.swing.JLabel();
-        actionComboBox = new javax.swing.JComboBox<>();
-        targetLabel = new javax.swing.JLabel();
-        targetComboBox = new javax.swing.JComboBox<>();
-        executeButton = new javax.swing.JButton();
-        inGameStatsPanel = new javax.swing.JPanel();
-        jScrollPane5 = new javax.swing.JScrollPane();
-        inGameCharTextArea1 = new javax.swing.JTextArea();
-        jScrollPane8 = new javax.swing.JScrollPane();
-        selectedActionTextArea = new javax.swing.JTextArea();
-        jScrollPane6 = new javax.swing.JScrollPane();
-        inGameCharTextArea2 = new javax.swing.JTextArea();
-        jScrollPane7 = new javax.swing.JScrollPane();
-        turnSummaryTextArea = new javax.swing.JTextArea();
         loginPane = new javax.swing.JPanel();
         loginPaneLabel = new javax.swing.JLabel();
         loginInnerPanel = new javax.swing.JPanel();
@@ -103,13 +125,8 @@ public class EScreen extends javax.swing.JFrame {
         createButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         userMenu = new javax.swing.JMenu();
-        editUserMenu = new javax.swing.JMenu();
         editNameMenuItem = new javax.swing.JMenuItem();
-        editPasswordMenuItem = new javax.swing.JMenuItem();
         logoutMenuItem = new javax.swing.JMenuItem();
-        skillsMenu = new javax.swing.JMenu();
-        listSkillsMenuItem = new javax.swing.JMenuItem();
-        createSkillMenuItem = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         helpMenuItem = new javax.swing.JMenuItem();
         aboutMenuItem = new javax.swing.JMenuItem();
@@ -122,6 +139,7 @@ public class EScreen extends javax.swing.JFrame {
         setTitle("Encore Crossover");
         setBackground(new java.awt.Color(51, 51, 51));
         setMinimumSize(new java.awt.Dimension(640, 480));
+        setPreferredSize(new java.awt.Dimension(640, 480));
         setSize(new java.awt.Dimension(640, 480));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
@@ -130,43 +148,207 @@ public class EScreen extends javax.swing.JFrame {
         });
 
         layeredPane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "Made by BeeHive", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.ABOVE_BOTTOM, new java.awt.Font("Segoe Script", 1, 10))); // NOI18N
-        layeredPane.setPreferredSize(new java.awt.Dimension(870, 440));
+        layeredPane.setMaximumSize(null);
+        layeredPane.setPreferredSize(null);
+        //Post-Init Code start(BeeHive)
         loginPane.setVisible(true);
         userPane.setVisible(false);
         gamePane.setVisible(false);
-        characterPane.setVisible(false);
+        characterPane.setVisible(false);  
+        skillPane.setVisible(false);
+        //Post-Init Code end(BeeHive)
         layeredPane.setLayout(new javax.swing.OverlayLayout(layeredPane));
 
+        skillPane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Skills"));
+        skillPane.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                skillPaneComponentShown(evt);
+            }
+        });
+        skillPane.setLayout(new java.awt.BorderLayout());
+
+        skillCharNamePane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Character Name"));
+        skillCharNamePane.setLayout(new javax.swing.BoxLayout(skillCharNamePane, javax.swing.BoxLayout.LINE_AXIS));
+
+        charNameTextField.setText("jTextField1");
+        skillCharNamePane.add(charNameTextField);
+
+        skillPane.add(skillCharNamePane, java.awt.BorderLayout.PAGE_START);
+
+        skillSplitPane.setDividerLocation(200);
+
+        skillListPane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Skill List"));
+        skillListPane.setPreferredSize(new java.awt.Dimension(200, 264));
+        skillListPane.setLayout(new javax.swing.BoxLayout(skillListPane, javax.swing.BoxLayout.LINE_AXIS));
+
+        skillList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        skillList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                skillListValueChanged(evt);
+            }
+        });
+        jScrollPane9.setViewportView(skillList);
+
+        skillListPane.add(jScrollPane9);
+
+        skillSplitPane.setLeftComponent(skillListPane);
+
+        skillStatPane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Skill Stats"));
+        skillStatPane.setLayout(new java.awt.GridLayout(6, 2));
+
+        skillNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        skillNameLabel.setText("Name: ");
+        skillStatPane.add(skillNameLabel);
+        skillStatPane.add(skillNameTextField);
+
+        skillTypeLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        skillTypeLabel.setText("Type: ");
+        skillStatPane.add(skillTypeLabel);
+
+        skillTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Damage Skill", "Healing Skill", "Effect Skill" }));
+        skillStatPane.add(skillTypeComboBox);
+
+        skillValueLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        skillValueLabel.setText("Value: ");
+        skillStatPane.add(skillValueLabel);
+        skillStatPane.add(skillValueSpinner);
+
+        skillCooldownLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        skillCooldownLabel.setText("Cooldown: ");
+        skillStatPane.add(skillCooldownLabel);
+        skillStatPane.add(skillCooldownSpinner);
+
+        skillStatEffectLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        skillStatEffectLabel.setText("Effect: ");
+        skillStatPane.add(skillStatEffectLabel);
+
+        skillEffectComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        skillStatPane.add(skillEffectComboBox);
+
+        skillDurationLabel.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        skillDurationLabel.setText("Duration: ");
+        skillStatPane.add(skillDurationLabel);
+        skillStatPane.add(skillDurationSpinner);
+
+        skillSplitPane.setRightComponent(skillStatPane);
+
+        skillPane.add(skillSplitPane, java.awt.BorderLayout.CENTER);
+
+        skillToolBar.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Options"));
+        skillToolBar.setRollover(true);
+
+        newSkillButton.setText("New Skill");
+        newSkillButton.setFocusable(false);
+        newSkillButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        newSkillButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        skillToolBar.add(newSkillButton);
+
+        saveSkillButton.setText("Save Skill");
+        saveSkillButton.setFocusable(false);
+        saveSkillButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        saveSkillButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        skillToolBar.add(saveSkillButton);
+
+        removeSkillButton.setText("Remove Skill");
+        removeSkillButton.setFocusable(false);
+        removeSkillButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        removeSkillButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        skillToolBar.add(removeSkillButton);
+
+        confirmChangeButton.setText("Confirm Changes");
+        confirmChangeButton.setFocusable(false);
+        confirmChangeButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        confirmChangeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        skillToolBar.add(confirmChangeButton);
+
+        discardChangeButton.setText("Discard Changes");
+        discardChangeButton.setFocusable(false);
+        discardChangeButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        discardChangeButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        discardChangeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                discardChangeButtonActionPerformed(evt);
+            }
+        });
+        skillToolBar.add(discardChangeButton);
+
+        skillPane.add(skillToolBar, java.awt.BorderLayout.PAGE_END);
+
+        layeredPane.add(skillPane);
+
         characterPane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Characters", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
+        characterPane.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                characterPaneComponentShown(evt);
+            }
+        });
         characterPane.setLayout(new java.awt.BorderLayout());
-
-        characterTabbedPane.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        characterInternalPane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "pane"));
-        characterInternalPane.setLayout(new java.awt.BorderLayout());
 
         characterToolBar.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Options", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
         characterToolBar.setRollover(true);
 
-        favoriteButton.setText("Add to Favorite");
-        favoriteButton.setFocusable(false);
-        favoriteButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        favoriteButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        characterToolBar.add(favoriteButton);
+        favCharButton.setText("Add to Favorite");
+        favCharButton.setFocusable(false);
+        favCharButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        favCharButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        favCharButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                favCharButtonActionPerformed(evt);
+            }
+        });
+        characterToolBar.add(favCharButton);
 
-        createCharButton.setText("Create New");
+        editCharButton.setText("Edit Character");
+        editCharButton.setFocusable(false);
+        editCharButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        editCharButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        editCharButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editCharButtonActionPerformed(evt);
+            }
+        });
+        characterToolBar.add(editCharButton);
+
+        createCharButton.setText("Create Character");
         createCharButton.setFocusable(false);
         createCharButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         createCharButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        createCharButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                createCharButtonActionPerformed(evt);
+            }
+        });
         characterToolBar.add(createCharButton);
 
-        removeCharButton.setText("Remove");
+        removeCharButton.setText("Remove Character");
         removeCharButton.setFocusable(false);
         removeCharButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         removeCharButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        removeCharButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeCharButtonActionPerformed(evt);
+            }
+        });
         characterToolBar.add(removeCharButton);
 
-        characterInternalPane.add(characterToolBar, java.awt.BorderLayout.PAGE_END);
+        backToUserButton.setText("Back");
+        backToUserButton.setFocusable(false);
+        backToUserButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        backToUserButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        backToUserButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backToUserButtonActionPerformed(evt);
+            }
+        });
+        characterToolBar.add(backToUserButton);
+
+        characterPane.add(characterToolBar, java.awt.BorderLayout.PAGE_END);
+
+        charSplitPane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Characters"));
 
         characterList.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Character 1", "Character 2", "Character 3", "Character 4", "Character 5" };
@@ -174,193 +356,26 @@ public class EScreen extends javax.swing.JFrame {
             public String getElementAt(int i) { return strings[i]; }
         });
         characterList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        characterList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                characterListValueChanged(evt);
+            }
+        });
         jScrollPane11.setViewportView(characterList);
 
-        jSplitPane1.setLeftComponent(jScrollPane11);
+        charSplitPane.setLeftComponent(jScrollPane11);
 
         characterTextArea.setEditable(false);
         characterTextArea.setColumns(20);
         characterTextArea.setLineWrap(true);
         characterTextArea.setRows(5);
-        characterTextArea.setText("character info\n");
         jScrollPane12.setViewportView(characterTextArea);
 
-        jSplitPane1.setRightComponent(jScrollPane12);
+        charSplitPane.setRightComponent(jScrollPane12);
 
-        characterInternalPane.add(jSplitPane1, java.awt.BorderLayout.CENTER);
-
-        characterTabbedPane.addTab("Characters", characterInternalPane);
-
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "pane"));
-        jPanel2.setLayout(new java.awt.BorderLayout());
-
-        jToolBar2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Options"));
-        jToolBar2.setRollover(true);
-
-        jButton5.setText("jButton5");
-        jButton5.setFocusable(false);
-        jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar2.add(jButton5);
-
-        jButton7.setText("jButton7");
-        jButton7.setFocusable(false);
-        jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar2.add(jButton7);
-
-        jButton8.setText("jButton8");
-        jButton8.setFocusable(false);
-        jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jButton8.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        jToolBar2.add(jButton8);
-
-        jPanel2.add(jToolBar2, java.awt.BorderLayout.PAGE_END);
-
-        characterTabbedPane.addTab("Skills", jPanel2);
-
-        characterPane.add(characterTabbedPane, java.awt.BorderLayout.CENTER);
+        characterPane.add(charSplitPane, java.awt.BorderLayout.CENTER);
 
         layeredPane.add(characterPane);
-
-        userPane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "User", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
-        userPane.setForeground(new java.awt.Color(102, 102, 102));
-        userPane.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                userPaneComponentShown(evt);
-            }
-        });
-        userPane.setLayout(new javax.swing.BoxLayout(userPane, javax.swing.BoxLayout.LINE_AXIS));
-
-        userTabbedPane.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-
-        userCharPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "pane"));
-        userCharPanel.setLayout(new java.awt.BorderLayout());
-
-        favCharSplitPane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Favorite Characters"));
-        favCharSplitPane.setDividerLocation(150);
-
-        favCharList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Character 1", "Character 2", "Character 3", "Character 4", "Character 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        favCharList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        favCharList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                favCharListValueChanged(evt);
-            }
-        });
-        jScrollPane1.setViewportView(favCharList);
-
-        favCharSplitPane.setLeftComponent(jScrollPane1);
-
-        selectedCharTextArea.setEditable(false);
-        selectedCharTextArea.setColumns(20);
-        selectedCharTextArea.setLineWrap(true);
-        selectedCharTextArea.setRows(5);
-        jScrollPane2.setViewportView(selectedCharTextArea);
-
-        favCharSplitPane.setRightComponent(jScrollPane2);
-
-        userCharPanel.add(favCharSplitPane, java.awt.BorderLayout.CENTER);
-
-        charListToolBar.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Options"));
-        charListToolBar.setRollover(true);
-
-        newGameButton.setText("New Game");
-        newGameButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                newGameButtonActionPerformed(evt);
-            }
-        });
-        charListToolBar.add(newGameButton);
-
-        addCharButton.setText("Add Character");
-        addCharButton.setFocusable(false);
-        addCharButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        addCharButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        charListToolBar.add(addCharButton);
-
-        removeCharacterButton.setText("Remove Character");
-        removeCharacterButton.setFocusable(false);
-        removeCharacterButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        removeCharacterButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        removeCharacterButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                removeCharacterButtonActionPerformed(evt);
-            }
-        });
-        charListToolBar.add(removeCharacterButton);
-
-        userCharPanel.add(charListToolBar, java.awt.BorderLayout.PAGE_END);
-
-        userTabbedPane.addTab("New Game", userCharPanel);
-
-        userHistoryPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "pane"));
-        userHistoryPanel.setLayout(new java.awt.BorderLayout());
-
-        historyToolBar.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Options"));
-        historyToolBar.setRollover(true);
-
-        historyConfirmButton.setText("Confirm");
-        historyConfirmButton.setFocusable(false);
-        historyConfirmButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        historyConfirmButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        historyConfirmButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                historyConfirmButtonActionPerformed(evt);
-            }
-        });
-        historyToolBar.add(historyConfirmButton);
-
-        historyRemoveButton.setText("Remove");
-        historyRemoveButton.setFocusable(false);
-        historyRemoveButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        historyRemoveButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        historyRemoveButton.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                historyRemoveButtonActionPerformed(evt);
-            }
-        });
-        historyToolBar.add(historyRemoveButton);
-
-        userHistoryPanel.add(historyToolBar, java.awt.BorderLayout.PAGE_END);
-
-        historySplitPane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Entries"));
-        historySplitPane.setDividerLocation(150);
-
-        historyList.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "History 1", "History 2", "History 3", "History 4", "History 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        historyList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        historyList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                historyListValueChanged(evt);
-            }
-        });
-        jScrollPane3.setViewportView(historyList);
-
-        historySplitPane.setLeftComponent(jScrollPane3);
-
-        historyTextArea.setEditable(false);
-        historyTextArea.setColumns(20);
-        historyTextArea.setLineWrap(true);
-        historyTextArea.setRows(5);
-        historyTextArea.setText("History");
-        jScrollPane4.setViewportView(historyTextArea);
-
-        historySplitPane.setRightComponent(jScrollPane4);
-
-        userHistoryPanel.add(historySplitPane, java.awt.BorderLayout.CENTER);
-
-        userTabbedPane.addTab("History", userHistoryPanel);
-
-        userPane.add(userTabbedPane);
-
-        layeredPane.add(userPane);
 
         gamePane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Game", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
         gamePane.setLayout(new java.awt.BorderLayout());
@@ -439,6 +454,147 @@ public class EScreen extends javax.swing.JFrame {
 
         layeredPane.add(gamePane);
 
+        userPane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "User", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
+        userPane.setForeground(new java.awt.Color(102, 102, 102));
+        userPane.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                userPaneComponentShown(evt);
+            }
+        });
+        userPane.setLayout(new javax.swing.BoxLayout(userPane, javax.swing.BoxLayout.LINE_AXIS));
+
+        userCharPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "pane"));
+        userCharPanel.setLayout(new java.awt.BorderLayout());
+
+        favCharSplitPane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Favorite Characters"));
+        favCharSplitPane.setDividerLocation(150);
+
+        favCharList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Character 1", "Character 2", "Character 3", "Character 4", "Character 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        favCharList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        favCharList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                favCharListValueChanged(evt);
+            }
+        });
+        jScrollPane1.setViewportView(favCharList);
+
+        favCharSplitPane.setLeftComponent(jScrollPane1);
+
+        selectedCharTextArea.setEditable(false);
+        selectedCharTextArea.setColumns(20);
+        selectedCharTextArea.setLineWrap(true);
+        selectedCharTextArea.setRows(5);
+        jScrollPane2.setViewportView(selectedCharTextArea);
+
+        favCharSplitPane.setRightComponent(jScrollPane2);
+
+        userCharPanel.add(favCharSplitPane, java.awt.BorderLayout.CENTER);
+
+        charListToolBar.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Options"));
+        charListToolBar.setRollover(true);
+
+        newGameButton.setText("New Game");
+        newGameButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newGameButtonActionPerformed(evt);
+            }
+        });
+        charListToolBar.add(newGameButton);
+
+        addCharButton.setText("Add Character");
+        addCharButton.setFocusable(false);
+        addCharButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        addCharButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        addCharButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addCharButtonActionPerformed(evt);
+            }
+        });
+        charListToolBar.add(addCharButton);
+
+        removeCharacterButton.setText("Remove Character");
+        removeCharacterButton.setFocusable(false);
+        removeCharacterButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        removeCharacterButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        removeCharacterButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeCharacterButtonActionPerformed(evt);
+            }
+        });
+        charListToolBar.add(removeCharacterButton);
+
+        userCharPanel.add(charListToolBar, java.awt.BorderLayout.PAGE_END);
+
+        userTabbedPane.addTab("New Game", userCharPanel);
+
+        userHistoryPanel.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED), "pane"));
+        userHistoryPanel.setLayout(new java.awt.BorderLayout());
+
+        historyToolBar.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Options"));
+        historyToolBar.setRollover(true);
+
+        historyConfirmButton.setText("Confirm");
+        historyConfirmButton.setFocusable(false);
+        historyConfirmButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        historyConfirmButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        historyConfirmButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                historyConfirmButtonActionPerformed(evt);
+            }
+        });
+        historyToolBar.add(historyConfirmButton);
+
+        historyRemoveButton.setText("Remove");
+        historyRemoveButton.setFocusable(false);
+        historyRemoveButton.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        historyRemoveButton.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        historyRemoveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                historyRemoveButtonActionPerformed(evt);
+            }
+        });
+        historyToolBar.add(historyRemoveButton);
+
+        userHistoryPanel.add(historyToolBar, java.awt.BorderLayout.PAGE_END);
+
+        historySplitPane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Entries"));
+        historySplitPane.setDividerLocation(150);
+
+        historyList.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "History 1", "History 2", "History 3", "History 4", "History 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        historyList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        historyList.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                historyListValueChanged(evt);
+            }
+        });
+        jScrollPane3.setViewportView(historyList);
+
+        historySplitPane.setLeftComponent(jScrollPane3);
+
+        historyTextArea.setEditable(false);
+        historyTextArea.setColumns(20);
+        historyTextArea.setLineWrap(true);
+        historyTextArea.setRows(5);
+        jScrollPane4.setViewportView(historyTextArea);
+
+        historySplitPane.setRightComponent(jScrollPane4);
+
+        userHistoryPanel.add(historySplitPane, java.awt.BorderLayout.CENTER);
+
+        userTabbedPane.addTab("History", userHistoryPanel);
+
+        userPane.add(userTabbedPane);
+
+        layeredPane.add(userPane);
+
         loginPane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Login", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
         loginPane.setLayout(new java.awt.BorderLayout());
 
@@ -494,35 +650,23 @@ public class EScreen extends javax.swing.JFrame {
 
         userMenu.setText("User");
 
-        editUserMenu.setText("Edit");
-
-        editNameMenuItem.setText("Name");
+        editNameMenuItem.setText("Change Username");
         editNameMenuItem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 editNameMenuItemActionPerformed(evt);
             }
         });
-        editUserMenu.add(editNameMenuItem);
-
-        editPasswordMenuItem.setText("Password");
-        editUserMenu.add(editPasswordMenuItem);
-
-        userMenu.add(editUserMenu);
+        userMenu.add(editNameMenuItem);
 
         logoutMenuItem.setText("LogOut");
+        logoutMenuItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutMenuItemActionPerformed(evt);
+            }
+        });
         userMenu.add(logoutMenuItem);
 
         jMenuBar1.add(userMenu);
-
-        skillsMenu.setText("Skills");
-
-        listSkillsMenuItem.setText("List");
-        skillsMenu.add(listSkillsMenuItem);
-
-        createSkillMenuItem.setText("Create");
-        skillsMenu.add(createSkillMenuItem);
-
-        jMenuBar1.add(skillsMenu);
 
         helpMenu.setText("Help");
 
@@ -547,7 +691,7 @@ public class EScreen extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(layeredPane, javax.swing.GroupLayout.DEFAULT_SIZE, 628, Short.MAX_VALUE)
+                .addComponent(layeredPane, javax.swing.GroupLayout.DEFAULT_SIZE, 603, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -603,6 +747,10 @@ public class EScreen extends javax.swing.JFrame {
 
     private void userPaneComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_userPaneComponentShown
         // TODO add your handling code here:
+        if(user.getClass() == EAdmin.class)
+            historyConfirmButton.setEnabled(true);
+        else
+            historyConfirmButton.setEnabled(false);
         List<String> list = new ArrayList<>();
         list.addAll(user.getFavList());
         String charList[]= new String[list.size()];
@@ -664,11 +812,13 @@ public class EScreen extends javax.swing.JFrame {
 
     private void removeCharacterButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeCharacterButtonActionPerformed
         // TODO add your handling code here:
-        if(JOptionPane.showConfirmDialog(layeredPane, "Remove Character from List?", "Remove", 0) == 1)
-            return;
-        String name = favCharList.getSelectedValue();
-        user.removeFavChar(name);
-        userPaneComponentShown(null);
+        if(favCharList.getSelectedValue() != null){
+            if(JOptionPane.showConfirmDialog(layeredPane, "Remove Character from List?", "Remove", 0) == 1)
+                return;
+            String name = favCharList.getSelectedValue();
+            user.removeFavChar(name);
+            userPaneComponentShown(null);
+        }
     }//GEN-LAST:event_removeCharacterButtonActionPerformed
 
     private void passwordFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passwordFieldFocusGained
@@ -717,18 +867,165 @@ public class EScreen extends javax.swing.JFrame {
 
     private void historyRemoveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historyRemoveButtonActionPerformed
         // TODO add your handling code here:
-        if(JOptionPane.showConfirmDialog(
-                layeredPane, "Remove history from List?",
-                "Remove", 0) == 1)
-            return;
-        user.removeHistory(historyList.getSelectedIndex());
-        userPaneComponentShown(null);
+        if(historyList.getSelectedValue() != null){
+            if(JOptionPane.showConfirmDialog(
+                    layeredPane, "Remove history from List?",
+                    "Remove", 0) == 1)
+                return;
+            user.removeHistory(historyList.getSelectedIndex());
+            userPaneComponentShown(null);
+        }
     }//GEN-LAST:event_historyRemoveButtonActionPerformed
 
     private void historyConfirmButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_historyConfirmButtonActionPerformed
         // TODO add your handling code here:
         user.confirmRequest(user.getHistory(historyList.getSelectedIndex()));
     }//GEN-LAST:event_historyConfirmButtonActionPerformed
+
+    private void editCharButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editCharButtonActionPerformed
+        // TODO add your handling code here:
+        if(characterList.getSelectedValue() != null){
+            String name = characterList.getSelectedValue();
+            charNameTextField.setText(name);
+            
+            List<String> skills = EChar.get(name).getSkillList();
+            String listData[] = new String[skills.size()];
+            for(int i = 0; i < skills.size(); i++){
+                listData[i] = skills.get(i);
+            }
+            skillList.setListData(listData);
+            
+            characterPane.setVisible(false);
+            skillPane.setVisible(true);
+        }
+    }//GEN-LAST:event_editCharButtonActionPerformed
+
+    private void characterListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_characterListValueChanged
+        // TODO add your handling code here:
+        if(characterList.getSelectedValue() == null){
+            characterTextArea.setText("");
+            return;
+        }
+        String cName = characterList.getSelectedValue();
+        characterTextArea.setText(EChar.get(cName).getProfile());
+    }//GEN-LAST:event_characterListValueChanged
+
+    private void characterPaneComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_characterPaneComponentShown
+        // TODO add your handling code here:
+        List<String> list = new ArrayList<>();
+        list.addAll(EChar.getCharList());
+        String charList[]= new String[list.size()];
+        for(int i = 0; i < list.size(); i++){
+            charList[i] = list.get(i);
+        }
+        characterList.setListData(charList);
+    }//GEN-LAST:event_characterPaneComponentShown
+
+    private void addCharButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addCharButtonActionPerformed
+        // TODO add your handling code here:
+        userPane.setVisible(false);
+        characterPane.setVisible(true);
+        
+    }//GEN-LAST:event_addCharButtonActionPerformed
+
+    private void backToUserButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backToUserButtonActionPerformed
+        // TODO add your handling code here:
+        userPane.setVisible(true);
+        characterPane.setVisible(false);
+    }//GEN-LAST:event_backToUserButtonActionPerformed
+
+    private void favCharButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_favCharButtonActionPerformed
+        // TODO add your handling code here:
+        if(user.getClass() != EAdmin.class && characterList.getSelectedValue() != null){
+            user.addFavChar(characterList.getSelectedValue());
+            userPane.setVisible(true);
+            characterPane.setVisible(false);
+        }
+    }//GEN-LAST:event_favCharButtonActionPerformed
+
+    private void logoutMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutMenuItemActionPerformed
+        // TODO add your handling code here:
+        user = null;
+        JOptionPane.showMessageDialog(layeredPane, "Logged out successfully.", "Logout", 1);
+        userPane.setVisible(false);
+        loginPane.setVisible(true);
+    }//GEN-LAST:event_logoutMenuItemActionPerformed
+
+    private void removeCharButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeCharButtonActionPerformed
+        // TODO add your handling code here:
+        if(characterList.getSelectedValue() != null){
+            String request[] = new String[3];
+            request[0] = "Request";
+            request[1] = "Remove";
+            request[2] = characterList.getSelectedValue();
+            user.sendRequest(request);
+            String message = "Character removal request sent to admin.";
+            JOptionPane.showMessageDialog(layeredPane, message, "Character", 1);
+        }
+    }//GEN-LAST:event_removeCharButtonActionPerformed
+
+    private void createCharButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createCharButtonActionPerformed
+        // TODO add your handling code here:
+        charNameTextField.setText("");
+        
+        String listData[] = new String[1];
+        listData[0] = "";
+        skillList.setListData(listData);
+        
+        characterPane.setVisible(false);
+        skillPane.setVisible(true);
+    }//GEN-LAST:event_createCharButtonActionPerformed
+
+    private void skillListValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_skillListValueChanged
+        // TODO add your handling code here:
+        if(skillList.getSelectedValue() != null){
+            String name = skillList.getSelectedValue();
+            skillNameTextField.setText(ESkill.get(name).getName());
+            
+            String type = ESkill.get(name).getClass().toString();
+            if(type.contains("DMG")){
+                skillTypeComboBox.setSelectedItem("Damage Skill");
+            }
+            else if(type.contains("Heal")){
+                skillTypeComboBox.setSelectedItem("Healing Skill");
+            }
+            else if(type.contains("Effect")){
+                skillTypeComboBox.setSelectedItem("Effect Skill");
+            }
+            
+            skillValueSpinner.setValue(ESkill.get(name).getValue());
+            
+            skillCooldownSpinner.setValue(ESkill.get(name).getCooldown());
+            
+            if(type.contains("Effect")){
+                skillEffectComboBox.setEnabled(true);
+                //skillEffectComboBox.setSelectedItem(e);
+                skillDurationSpinner.setEnabled(true);
+                //skillDurationSpinner.setValue(d);
+            }
+            else{
+                skillEffectComboBox.setEnabled(false);
+                skillDurationSpinner.setEnabled(false);
+            }
+        }
+    }//GEN-LAST:event_skillListValueChanged
+
+    private void discardChangeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_discardChangeButtonActionPerformed
+        // TODO add your handling code here:
+        characterPane.setVisible(true);
+        skillPane.setVisible(false);
+    }//GEN-LAST:event_discardChangeButtonActionPerformed
+
+    private void skillPaneComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_skillPaneComponentShown
+        // TODO add your handling code here:
+        skillNameTextField.setText("");
+        skillTypeComboBox.setSelectedItem("");
+        skillValueSpinner.setValue(0);
+        skillCooldownSpinner.setValue(0);
+        skillEffectComboBox.setSelectedItem("");
+        skillDurationSpinner.setValue("");
+        
+    }//GEN-LAST:event_skillPaneComponentShown
 
     /**
      * @param args the command line arguments
@@ -772,23 +1069,24 @@ public class EScreen extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> actionComboBox;
     private javax.swing.JLabel actionLabel;
     private javax.swing.JButton addCharButton;
+    private javax.swing.JButton backToUserButton;
     private javax.swing.JToolBar charListToolBar;
-    private javax.swing.JPanel characterInternalPane;
+    private javax.swing.JTextField charNameTextField;
+    private javax.swing.JSplitPane charSplitPane;
     private javax.swing.JList<String> characterList;
     private javax.swing.JPanel characterPane;
-    private javax.swing.JTabbedPane characterTabbedPane;
     private javax.swing.JTextArea characterTextArea;
     private javax.swing.JToolBar characterToolBar;
+    private javax.swing.JButton confirmChangeButton;
     private javax.swing.JButton createButton;
     private javax.swing.JButton createCharButton;
-    private javax.swing.JMenuItem createSkillMenuItem;
+    private javax.swing.JButton discardChangeButton;
+    private javax.swing.JButton editCharButton;
     private javax.swing.JMenuItem editNameMenuItem;
-    private javax.swing.JMenuItem editPasswordMenuItem;
-    private javax.swing.JMenu editUserMenu;
     private javax.swing.JButton executeButton;
+    private javax.swing.JButton favCharButton;
     private javax.swing.JList<String> favCharList;
     private javax.swing.JSplitPane favCharSplitPane;
-    private javax.swing.JButton favoriteButton;
     private javax.swing.JPanel gamePane;
     private javax.swing.JMenu helpMenu;
     private javax.swing.JMenuItem helpMenuItem;
@@ -803,12 +1101,8 @@ public class EScreen extends javax.swing.JFrame {
     private javax.swing.JTextArea inGameCharTextArea2;
     private javax.swing.JPanel inGameStatsPanel;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane12;
@@ -819,23 +1113,42 @@ public class EScreen extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
-    private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JToolBar jToolBar2;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JLayeredPane layeredPane;
-    private javax.swing.JMenuItem listSkillsMenuItem;
     private javax.swing.JButton loginButton;
     private javax.swing.JPanel loginInnerPanel;
     private javax.swing.JPanel loginPane;
     private javax.swing.JLabel loginPaneLabel;
     private javax.swing.JMenuItem logoutMenuItem;
     private javax.swing.JButton newGameButton;
+    private javax.swing.JButton newSkillButton;
     private javax.swing.JPasswordField passwordField;
     private javax.swing.JLabel passwordLabel;
     private javax.swing.JButton removeCharButton;
     private javax.swing.JButton removeCharacterButton;
+    private javax.swing.JButton removeSkillButton;
+    private javax.swing.JButton saveSkillButton;
     private javax.swing.JTextArea selectedActionTextArea;
     private javax.swing.JTextArea selectedCharTextArea;
-    private javax.swing.JMenu skillsMenu;
+    private javax.swing.JPanel skillCharNamePane;
+    private javax.swing.JLabel skillCooldownLabel;
+    private javax.swing.JSpinner skillCooldownSpinner;
+    private javax.swing.JLabel skillDurationLabel;
+    private javax.swing.JSpinner skillDurationSpinner;
+    private javax.swing.JComboBox<String> skillEffectComboBox;
+    private javax.swing.JList<String> skillList;
+    private javax.swing.JPanel skillListPane;
+    private javax.swing.JLabel skillNameLabel;
+    private javax.swing.JTextField skillNameTextField;
+    private javax.swing.JPanel skillPane;
+    private javax.swing.JSplitPane skillSplitPane;
+    private javax.swing.JLabel skillStatEffectLabel;
+    private javax.swing.JPanel skillStatPane;
+    private javax.swing.JToolBar skillToolBar;
+    private javax.swing.JComboBox<String> skillTypeComboBox;
+    private javax.swing.JLabel skillTypeLabel;
+    private javax.swing.JLabel skillValueLabel;
+    private javax.swing.JSpinner skillValueSpinner;
     private javax.swing.JComboBox<String> targetComboBox;
     private javax.swing.JLabel targetLabel;
     private javax.swing.JTextArea turnSummaryTextArea;

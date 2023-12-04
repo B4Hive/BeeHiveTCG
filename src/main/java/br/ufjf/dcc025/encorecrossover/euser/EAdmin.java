@@ -1,6 +1,7 @@
 package br.ufjf.dcc025.encorecrossover.euser;
 
 import br.ufjf.dcc025.encorecrossover.echar.EChar;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -26,7 +27,7 @@ public class EAdmin extends EUser {
     }
     @Override
     public void confirmRequest(String request) {
-        System.out.println("NYI EAdmin.confirmRequest()");
+        JOptionPane.showMessageDialog(null, "NYI EAdmin.confirmRequest()", "NYI", 0);
     }
     public static void reportError(String error){
         String request[] = new String [2];
