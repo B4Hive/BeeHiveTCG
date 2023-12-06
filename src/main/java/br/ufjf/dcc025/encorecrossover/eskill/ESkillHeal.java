@@ -57,4 +57,9 @@ public class ESkillHeal extends ESkill {
         }
         return new ESkillHeal(n, v, c);
     }
+
+    @Override
+    public String getExtra() {
+        return null;
+    }
 }

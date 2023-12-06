@@ -16,20 +16,23 @@ public class EChar {
     private static final Map<String,EChar> characters = new HashMap<>();
     
     //attributes
-    private final String name;
+    private String name;
     private int hp;
     private final Map<String,ESkill> skills;
     private final Map<String,EEffect> effects;
-    //private final Map<String,EItem> inventory;
     private int team;
     
     //constructor
+    public EChar(){
+        this.name = "Character Name";
+        this.skills = new HashMap<>();
+        this.effects = new HashMap<>();
+    }
     public EChar(String name, Map<String,ESkill> skills) {
         this.name = name;
         this.skills = new HashMap<>();
         this.skills.putAll(skills);
         this.effects = new HashMap<>();
-        //this.inventory = new HashMap<>();
     }
     public static EChar createTemplate(String name){
         Map<String,ESkill> tempKit = new HashMap<>();
@@ -43,6 +46,12 @@ public class EChar {
     }
     static void add(EChar object){
         characters.put(object.getName(), object);
+    }
+    public void addSkill(ESkill skill){
+        this.skills.put(skill.getName(), skill);
+    }
+    public void removeSkill(String skill){
+        this.skills.remove(skill);
     }
     //getters
     public static EChar get(String name){
@@ -93,7 +102,10 @@ public class EChar {
         }
         return string;
     }
-    //getEffects, getInventory
+    
+    public void setName(String name){
+        this.name = name;
+    }
     
     //methods
     public static void init(){
@@ -174,6 +186,7 @@ public class EChar {
         String n = "";
         Map<String,ESkill> skills = new HashMap<>();
         EChar ret = null;
+        info = info.replaceAll("#", ":").replaceAll("->", "=").replace(";", "");
         String type[] = info.split(":");
         String attributeSplit[] = type[1].split(", ");
         for(String attribute : attributeSplit){
@@ -203,6 +216,16 @@ public class EChar {
         for(String key : skills.keySet())
             temp += key + "/";
         temp += ";\n";
+        return temp;
+    }
+    public String toRequest() {
+        return toString().replaceAll(":", "#").replaceAll("=", "->");
+    }
+    @Override
+    public EChar clone() throws CloneNotSupportedException {
+        EChar temp = new EChar();
+        temp.setName(this.name);
+        temp.skills.putAll(this.skills);
         return temp;
     }
     

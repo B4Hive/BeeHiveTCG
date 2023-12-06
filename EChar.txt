@@ -1,2 +1,3 @@
 EChar:name=NPC, skills=NPC ATK/NPC HEAL/NPC DOT/NPC HOT/NPC BUFF/;
 EChar:name=PC, skills=PC ATK/PC BUFF/PC HOT/PC HEAL/PC DOT/;
+EChar:name=RK, skills=Punch/Rage/Boom/Boil/;

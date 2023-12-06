@@ -51,7 +51,6 @@ public class EScreen extends javax.swing.JFrame {
         passwordField = new javax.swing.JPasswordField();
         loginButton = new javax.swing.JButton();
         createButton = new javax.swing.JButton();
-        usernameComboBox = new javax.swing.JComboBox<>();
         characterPane = new javax.swing.JPanel();
         characterToolBar = new javax.swing.JToolBar();
         favCharButton = new javax.swing.JButton();
@@ -161,11 +160,6 @@ public class EScreen extends javax.swing.JFrame {
         layeredPane.setLayout(new javax.swing.OverlayLayout(layeredPane));
 
         loginPane.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createEtchedBorder(), "Login", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.TOP));
-        loginPane.addComponentListener(new java.awt.event.ComponentAdapter() {
-            public void componentShown(java.awt.event.ComponentEvent evt) {
-                loginPaneComponentShown(evt);
-            }
-        });
         loginPane.setLayout(new java.awt.BorderLayout());
 
         loginPaneLabel.setFont(new java.awt.Font("Unispace", 1, 48)); // NOI18N
@@ -220,10 +214,6 @@ public class EScreen extends javax.swing.JFrame {
         loginInnerPanel.add(createButton);
 
         loginPane.add(loginInnerPanel, java.awt.BorderLayout.PAGE_END);
-
-        usernameComboBox.setEditable(true);
-        usernameComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        loginPane.add(usernameComboBox, java.awt.BorderLayout.PAGE_START);
 
         layeredPane.add(loginPane);
 
@@ -730,7 +720,9 @@ public class EScreen extends javax.swing.JFrame {
 
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginButtonActionPerformed
         // TODO add your handling code here:
-        user = EUser.login(usernameComboBox.getText(), passwordField.getPassword().toString());
+        String username = usernameField.getText();
+        String password = String.valueOf(passwordField.getPassword());
+        user = EUser.login(username, password);
         if(user != null){
             JOptionPane.showMessageDialog(loginPane, "Login successful.", "Login", 1);
             loginPane.setVisible(false);
@@ -1161,12 +1153,6 @@ public class EScreen extends javax.swing.JFrame {
         tempChar.setName(charNameTextField.getText());
     }//GEN-LAST:event_charNameTextFieldFocusLost
 
-    private void loginPaneComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_loginPaneComponentShown
-        // TODO add your handling code here:
-        for(String name : EUser.getUserList())
-            usernameComboBox.addItem(name);
-    }//GEN-LAST:event_loginPaneComponentShown
-
     /**
      * @param args the command line arguments
      */
@@ -1297,7 +1283,6 @@ public class EScreen extends javax.swing.JFrame {
     private javax.swing.JMenu userMenu;
     private javax.swing.JPanel userPane;
     private javax.swing.JTabbedPane userTabbedPane;
-    private javax.swing.JComboBox<String> usernameComboBox;
     private javax.swing.JTextField usernameField;
     private javax.swing.JLabel usernameLabel;
     // End of variables declaration//GEN-END:variables

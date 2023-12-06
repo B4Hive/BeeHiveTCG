@@ -1,7 +1,9 @@
 package br.ufjf.dcc025.encorecrossover.eskill;
 
 import br.ufjf.dcc025.encorecrossover.echar.EChar;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -39,11 +41,14 @@ public abstract class ESkill {
     public int getTimer() {
         return timer;
     }
+    public abstract String getExtra();
     
     //methods
     public static void init(){
     }
-    
+    public static boolean exists(String skill){
+        return skills.keySet().contains(skill);
+    }
     public static String export(){
         String string = "";
         for(String key : skills.keySet()){
@@ -58,19 +63,31 @@ public abstract class ESkill {
     public static ESkill get(String key){
         return skills.get(key);//.clone();
     }
+    public static void demlurb(){
+        List<String> trashList = new ArrayList<>();
+        trashList.addAll(skills.keySet());
+        for(String character : EChar.getCharList()){
+            for(String skill : EChar.get(character).getSkillList()){
+                if(trashList.contains(skill))
+                    trashList.remove(skill);
+            }
+        }
+        for(String trash : trashList){
+            skills.remove(trash);
+        }
+    }
     
     public void startCooldown(){
         timer = cooldown;
     }
-    
     public boolean isOnCooldown(){
         return timer > 0;
     }
-    
     public void tickCooldown(){
         if(timer > 0)
             timer--;
     }
+    
     public int calcValue(int value){
         int calc = 0;
         calc += Math.round(Math.random()*value);
@@ -84,8 +101,7 @@ public abstract class ESkill {
     
     public static void toESkill(String info){
         ESkill ret = null;
-        if(info.contains(";"))
-            info = info.substring(0, info.length()-1);
+        info = info.replaceAll("#", ":").replaceAll("->", "=").replace(";", "");
         String type[] = info.split(":");
         switch(type[0]){
             case "ESkillDMG" ->{
@@ -110,6 +126,10 @@ public abstract class ESkill {
         temp += ", cooldown=" + cooldown;
         temp += ";\n";
         return  temp;
+    }
+    
+    public String toRequest(){
+        return toString().replaceAll(":", "#").replaceAll("=", "->");
     }
     
     /**

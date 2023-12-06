@@ -50,7 +50,9 @@ public abstract class EUser {
     static EUser get(String name){
         return users.get(name);
     }
-    
+    public static Set<String> getUserList(){
+        return users.keySet();
+    }
     public String getName(){
         return name;
     }
@@ -69,6 +71,13 @@ public abstract class EUser {
         this.name = username;
         users.put(username, this);
         return true;
+    }
+    public boolean setPassword(String password, String confirmation){
+        if(password.equals(confirmation)){
+            this.password = password;
+            return true;
+        }
+        return false;
     }
     
     public static EUser login(String name, String password){
@@ -126,7 +135,7 @@ public abstract class EUser {
         EUser.get("admin").addHistory(request);
     }
     
-    public abstract void confirmRequest(String request);
+    public abstract void confirmRequest(int index);
     
     public static void toEUser(String info){
         String n = "";

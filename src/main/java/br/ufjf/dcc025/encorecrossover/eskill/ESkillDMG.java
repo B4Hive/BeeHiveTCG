@@ -28,10 +28,14 @@ public class ESkillDMG extends ESkill {
     public String cast(EChar target, Map<String,EEffect> effects) {
         if(!isOnCooldown()){
             int value = calcValue(getValue());
-            value += dmgBonus(effects);
-            target.takeDMG(value);
+            int bonus = dmgBonus(effects);
+            target.takeDMG(value+bonus);
             startCooldown();
-            return target.getName() + " takes " + value + " damage.";
+            String sum = target.getName() + " takes " + value;
+            if(bonus > 0)
+                sum += " + " + bonus;
+            sum += " damage.";
+            return sum;
         }
         return "Skill on Cooldown";
     }
@@ -64,5 +68,10 @@ public class ESkillDMG extends ESkill {
             }
         }
         return new ESkillDMG(n, v, c);
+    }
+
+    @Override
+    public String getExtra() {
+        return null;
     }
 }

@@ -65,6 +65,7 @@ public class EData {
         }
     }
     public static void exportData(){
+        ESkill.demlurb();
         FileWriter fOut = null;
         ESkillExport(fOut);
         ECharExport(fOut);

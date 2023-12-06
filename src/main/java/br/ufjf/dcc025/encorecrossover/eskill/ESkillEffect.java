@@ -96,5 +96,10 @@ public class ESkillEffect extends ESkill {
         temp.duration = d;
         return temp;
     }
+
+    @Override
+    public String getExtra() {
+        return effect.getType() + ":" + duration;
+    }
     
 }
