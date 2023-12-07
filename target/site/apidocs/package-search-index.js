@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"br.ufjf.dcc025.encorecrossover.echar"},{"l":"br.ufjf.dcc025.encorecrossover.edata"},{"l":"br.ufjf.dcc025.encorecrossover.eengine"},{"l":"br.ufjf.dcc025.encorecrossover.eskill"},{"l":"br.ufjf.dcc025.encorecrossover.euser"}];updateSearchResults();

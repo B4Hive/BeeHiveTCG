@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  *
- * @author b4bru
+ * @author Bruno dos Santos Silva - 201935031
  */
 public class ESkillHeal extends ESkill {
     //constructor
@@ -40,9 +40,9 @@ public class ESkillHeal extends ESkill {
         String n = "";
         int v = 0;
         int c = 0;
-        String attributeSplit[] = info.split(", ");
+        String[] attributeSplit = info.split(", ");
         for(String attribute : attributeSplit){
-            String temp[] = attribute.split("=");
+            String[] temp = attribute.split("=");
             switch(temp[0]){
                 case "name" -> {
                     n = temp[1];

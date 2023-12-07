@@ -6,7 +6,7 @@ import java.util.Map;
 
 /**
  *
- * @author b4bru
+ * @author Bruno dos Santos Silva - 201935031
  */
 public class ESkillEffect extends ESkill {
     //attributes
@@ -53,7 +53,7 @@ public class ESkillEffect extends ESkill {
     @Override
     public String toString(){
         String temp = getClass() + ":";
-        String split[] = temp.split("\\.");
+        String[] split = temp.split("\\.");
         temp = split[split.length - 1];
         temp += "name=" + getName();
         temp += ", value=" + getValue();
@@ -70,25 +70,15 @@ public class ESkillEffect extends ESkill {
         int c = 0;
         String e = "";
         int d = 0;
-        String attributeSplit[] = info.split(", ");
+        String[] attributeSplit = info.split(", ");
         for(String attribute : attributeSplit){
-            String temp[] = attribute.split("=");
+            String[] temp = attribute.split("=");
             switch(temp[0]){
-                case "name" -> {
-                    n = temp[1];
-                }
-                case "value" -> {
-                    v = Integer.parseInt(temp[1]);
-                }
-                case "cooldown" -> {
-                    c = Integer.parseInt(temp[1]);
-                }
-                case "effect" -> {
-                    e = temp[1];
-                }
-                case "duration" -> {
-                    d = Integer.parseInt(temp[1]);
-                }
+                case "name" -> n = temp[1];
+                case "value" -> v = Integer.parseInt(temp[1]);
+                case "cooldown" -> c = Integer.parseInt(temp[1]);
+                case "effect" -> e = temp[1];
+                case "duration" -> d = Integer.parseInt(temp[1]);
             }
         }
         ESkillEffect temp = new ESkillEffect(n,v,c);

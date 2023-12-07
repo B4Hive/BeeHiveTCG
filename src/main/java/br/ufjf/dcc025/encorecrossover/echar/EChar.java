@@ -1,6 +1,7 @@
 package br.ufjf.dcc025.encorecrossover.echar;
 
 import br.ufjf.dcc025.encorecrossover.eskill.*;
+import br.ufjf.dcc025.encorecrossover.euser.EAdmin;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,12 +10,12 @@ import java.util.Set;
 
 /**
  *
- * @author b4bru
+ * @author Bruno dos Santos Silva - 201935031
  */
 public class EChar {
     
-    private static final Map<String,EChar> characters = new HashMap<>();
-    
+    private static final Map<String,EChar> bank = new HashMap<>();
+    private static final int MAX_HP = 20;
     //attributes
     private String name;
     private int hp;
@@ -41,28 +42,37 @@ public class EChar {
         tempKit.put(name+" HOT", ESkillEffect.create(name+" HOT",1,3,"HOT",2));
         tempKit.put(name+" DOT", ESkillEffect.create(name+" DOT",1,3,"DOT",2));
         tempKit.put(name+" BUFF", ESkillEffect.create(name+" BUFF",1,3,"DMG",2));
-        characters.put(name, new EChar(name, tempKit));
-        return characters.get(name);
+        bank.put(name, new EChar(name, tempKit));
+        return bank.get(name);
     }
+    
     static void add(EChar object){
-        characters.put(object.getName(), object);
+        bank.put(object.getName(), object);
     }
+    public static void remove(EAdmin admin, String name){
+        bank.remove(name);
+    }
+    
     public void addSkill(ESkill skill){
         this.skills.put(skill.getName(), skill);
     }
     public void removeSkill(String skill){
         this.skills.remove(skill);
     }
+    
     //getters
     public static EChar get(String name){
-        return characters.get(name);
+        return bank.get(name);
     }
     public static Set<String> getCharList(){
-        return characters.keySet();
+        return bank.keySet();
     }
     
     public String getName() {
         return name;
+    }
+    public void setName(String name){
+        this.name = name;
     }
     public int getHP() {
         return hp;
@@ -71,15 +81,18 @@ public class EChar {
         String string = name;
         string += "\nTeam=" + team;
         string += "\nHP=" + hp;
-        //string += getSkillList();
         string += "\nEffects=" + effects.keySet();
-        //string += "\nInventory=" + inventory.keySet();
         return string;
     }
-
-    public List<String> getSkillList() {
+    public List<String> getFullSkillList(){
         List<String> list = new ArrayList<>();
-        //only display skills off-cooldown
+        for(String key : skills.keySet()){
+            list.add(key);
+        }
+        return list;
+    }
+    public List<String> getOffCooldownSkills() {
+        List<String> list = new ArrayList<>();
         for(String key : skills.keySet()){
             if(!skills.get(key).isOnCooldown())
                 list.add(key);
@@ -103,26 +116,23 @@ public class EChar {
         return string;
     }
     
-    public void setName(String name){
-        this.name = name;
-    }
-    
     //methods
     public static void init(){
-        characters.put("PC", EChar.createTemplate("PC"));
-        characters.put("NPC", EChar.createTemplate("NPC"));
+        bank.put("PC", EChar.createTemplate("PC"));
+        bank.put("NPC", EChar.createTemplate("NPC"));
     }
+    
     //import
     public static String export(){
         String string = "";
-        for(String key : characters.keySet()){
-            string += characters.get(key).toString();
+        for(String key : bank.keySet()){
+            string += bank.get(key).toString();
         }
         return string;
     }
     
     public void initChar(int team){
-        this.hp = 20;
+        this.hp = MAX_HP;
         this.team = team;
         /*
         for(String key : skills.keySet()){
@@ -135,7 +145,7 @@ public class EChar {
         this.hp -= value;
     }
     public void heal(int value){
-        this.hp = Math.min(hp+value, 100);
+        this.hp = Math.min(hp+value, MAX_HP);
     }
     public String cast(String skill, EChar target){
         String log = name + " uses ";
@@ -187,16 +197,16 @@ public class EChar {
         Map<String,ESkill> skills = new HashMap<>();
         EChar ret = null;
         info = info.replaceAll("#", ":").replaceAll("->", "=").replace(";", "");
-        String type[] = info.split(":");
-        String attributeSplit[] = type[1].split(", ");
+        String[] type = info.split(":");
+        String[] attributeSplit = type[1].split(", ");
         for(String attribute : attributeSplit){
-            String temp[] = attribute.split("=");
+            String[] temp = attribute.split("=");
             switch(temp[0]){
                 case "name" -> {
                     n = temp[1];
                 }
                 case "skills" -> {
-                    String skill[] = temp[1].split("/");
+                    String[] skill = temp[1].split("/");
                     for(String s : skill){
                         skills.put(s, ESkill.get(s));
                     }
@@ -209,7 +219,7 @@ public class EChar {
     @Override
     public String toString() {
         String temp = getClass() + ":";
-        String split[] = temp.split("\\.");
+        String[] split = temp.split("\\.");
         temp = split[split.length - 1];
         temp += "name=" + name;
         temp += ", skills=";//skills.keySet();
@@ -221,6 +231,7 @@ public class EChar {
     public String toRequest() {
         return toString().replaceAll(":", "#").replaceAll("=", "->");
     }
+    
     @Override
     public EChar clone() throws CloneNotSupportedException {
         EChar temp = new EChar();
@@ -230,18 +241,3 @@ public class EChar {
     }
     
 }
-/*
-Attributes{
-    Set Skills;
-    int HP;
-    List effects;
-    List inventory;
-    int team;
-}
-Methods{
-    takeDMG(int value);
-    heal(int value);
-    getSkillList();
-    castSkill(EChar target);
-}
-*/

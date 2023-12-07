@@ -2,7 +2,7 @@ package br.ufjf.dcc025.encorecrossover.euser;
 
 /**
  *
- * @author b4bru
+ * @author Bruno dos Santos Silva - 201935031
  */
 public class EPlayer extends EUser {
     //attributes

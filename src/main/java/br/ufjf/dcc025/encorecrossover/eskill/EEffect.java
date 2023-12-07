@@ -1,6 +1,13 @@
 package br.ufjf.dcc025.encorecrossover.eskill;
 
+/**
+ *
+ * @author Bruno dos Santos Silva - 201935031
+ */
 public class EEffect {
+    
+    //private static Set<String> bank = new HashSet<>();
+    
     //attributes
     private final String name;
     private final String type;
@@ -34,12 +41,13 @@ public class EEffect {
     public int getValue() {
         return value;
     }
-    public int getTimer() {
-        return timer;
-    }
     public String getDescription(){
         String string = getName() + ": ";
-        string += "NYI. EEffect.getDescription()";
+        switch(type){
+            case "DOT" -> string += "Deals " + value + " damage per turn.";
+            case "HOT" -> string += "Heals " + value + "HP per turn.";
+            case "DMG" -> string += "Increases damage done by 0~" + value + ".";
+        }
         return string;
     }
     //methods
@@ -54,14 +62,3 @@ public class EEffect {
         return (Math.round(Math.random()) == 0);
     }
 }
-/*
-Attributes{
-    String name;
-    int id;
-}
-Methods{
-    apply();
-    remove();
-    tick();
-}
-*/

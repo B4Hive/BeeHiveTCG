@@ -16,6 +16,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
-        <exec.mainClass>br.ufjf.dcc025.encorecrossover.EncoreCrossover</exec.mainClass>
+        <exec.mainClass>br.ufjf.dcc025.encorecrossover.eengine.EScreen</exec.mainClass>
     </properties>
 </project>

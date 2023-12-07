@@ -1,13 +1,14 @@
 package br.ufjf.dcc025.encorecrossover.eengine;
 
 import br.ufjf.dcc025.encorecrossover.echar.EChar;
+import br.ufjf.dcc025.encorecrossover.eskill.ESkill;
 import br.ufjf.dcc025.encorecrossover.euser.EUser;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  *
- * @author b4bru
+ * @author Bruno dos Santos Silva - 201935031
  */
 public class EFight {
     //attributes
@@ -24,8 +25,7 @@ public class EFight {
     }
     public static EFight pve(EUser user, String char1){
         EChar temp = EChar.get(char1);
-        List<String> characters = new ArrayList<>();
-        characters.addAll(EChar.getCharList());
+        List<String> characters = new ArrayList<>(EChar.getCharList());
         characters.remove(temp.getName());
         int rand = (int) (Math.random() * characters.size());
         EChar temp2 = EChar.get(characters.get(rand));
@@ -39,11 +39,9 @@ public class EFight {
         return char2.getInfo();
     }
     public List<String> getActionList(){
-        return char1.getSkillList();
+        return char1.getOffCooldownSkills();
     }
-    public String getLastTurn(){
-        return history.get( history.size() - 1 );
-    }
+
     //methods
     public void start(){
         char1.initChar(1);
@@ -63,10 +61,15 @@ public class EFight {
     }
     public String IA(){
         String ia = "\n";
-        List<String> action = char2.getSkillList();
+        List<String> action = char2.getOffCooldownSkills();
         int id = (int) Math.round(Math.random() * (action.size()-1));
-        //shit ton of conditionals to actually choose the target instead of randombulshitgo
-        ia += char2.cast(action.get(id), char1);
+        String skill = action.get(id);
+        if(ESkill.get(skill).getDescription().toLowerCase().contains("heal"))
+            ia += char2.cast(skill, char2);
+        else if(ESkill.get(skill).getDescription().toLowerCase().contains("increase"))
+            ia += char2.cast(skill, char2);
+        else
+            ia += char2.cast(skill, char1);
         return ia;
     }
     public boolean end(){
@@ -76,7 +79,7 @@ public class EFight {
                 history.add(0, "Victory");
             else
                 history.add(0, "Defeat");
-            String result[] = new String[history.size()];
+            String[] result = new String[history.size()];
             for(int i = 0; i < history.size(); i++)
                 result[i] = history.get(i);
             user.addHistory(result);
@@ -85,14 +88,3 @@ public class EFight {
         return false;
     }
 }
-/*
-Attributes{
-    List characters;
-    List history;
-}
-Methods{
-    newNormalGame();
-    newBattleRoyale();
-    tempScreen(); //CLI
-}
-*/

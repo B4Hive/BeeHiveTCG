@@ -5,7 +5,7 @@ import java.util.Map;
 
 /**
  *
- * @author b4bru
+ * @author Bruno dos Santos Silva - 201935031
  */
 public class ESkillDMG extends ESkill {
     //constructor
@@ -31,7 +31,10 @@ public class ESkillDMG extends ESkill {
             int bonus = dmgBonus(effects);
             target.takeDMG(value+bonus);
             startCooldown();
-            String sum = target.getName() + " takes " + value;
+            String sum = "";
+            if(value > getValue())
+                sum += "Critical Hit.\n";
+            sum += target.getName() + " takes " + value;
             if(bonus > 0)
                 sum += " + " + bonus;
             sum += " damage.";
@@ -43,7 +46,7 @@ public class ESkillDMG extends ESkill {
         int bonus = 0;
         for(String key : effects.keySet()){
             if( effects.get(key).getType().equals("DMG") ){
-                bonus += Math.round( Math.random() * effects.get(key).getValue());
+                bonus += (int) Math.round( Math.random() * effects.get(key).getValue());
             }
         }
         return bonus;
@@ -52,9 +55,9 @@ public class ESkillDMG extends ESkill {
         String n = "";
         int v = 0;
         int c = 0;
-        String attributeSplit[] = info.split(", ");
+        String[] attributeSplit = info.split(", ");
         for(String attribute : attributeSplit){
-            String temp[] = attribute.split("=");
+            String[] temp = attribute.split("=");
             switch(temp[0]){
                 case "name" -> {
                     n = temp[1];

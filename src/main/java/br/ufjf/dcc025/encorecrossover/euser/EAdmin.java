@@ -6,7 +6,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author b4bru
+ * @author Bruno dos Santos Silva - 201935031
  */
 public class EAdmin extends EUser {
     //attributes
@@ -26,28 +26,41 @@ public class EAdmin extends EUser {
 
     @Override
     public void confirmRequest(int index) {
-        String request[] = this.getHistory(index).split("\n");
-        if (request[0].contains("Create")) {
+        String[] request = this.getHistory(index).split("\n");
+        if (request[0].contains("Create") || request[0].contains("Update")) {
             for (int i = 1; i < request.length; i++) {
                 if (request[i].contains("ESkill")) {
                     ESkill.toESkill(request[i]);
-                } else if (request[i].contains("EChar")) {
+                }
+                if (request[i].contains("EChar")) {
                     EChar.toEChar(request[i]);
+                }
+            }
+            for(String un : EUser.getUserList()){
+                if(EUser.get(un).getFavList().contains(request[2])){
+                    String[] notification = {"Character Updated by admin", "Character Name: " + request[2]};
+                    EUser.get(un).addHistory(notification);
                 }
             }
             JOptionPane.showMessageDialog(null, "Success.", "Confirmation", 1);
         }
-        if (request[0].contains("Update")) {
-            JOptionPane.showMessageDialog(null, "NYI EAdmin.confirmRequest()", "NYI", 0);
-        }
         if (request[0].contains("Remove")) {
-            JOptionPane.showMessageDialog(null, "NYI EAdmin.confirmRequest()", "NYI", 0);
+            EChar.remove(this, request[2]);
+            for(String un : EUser.getUserList()){
+                if(EUser.get(un).getFavList().contains(request[2])){
+                    EUser.get(un).removeFavChar(request[2]);
+                    String[] notification = {"Character Removed by admin", "Character Name: " + request[2]};
+                    EUser.get(un).addHistory(notification);
+                }
+            }
+            JOptionPane.showMessageDialog(null, "Success", "Confirmation", 1);
         }
+        ESkill.demlurb();
         this.removeHistory(index);
     }
 
     public static void reportError(String error) {
-        String request[] = new String[2];
+        String[] request = new String[2];
         request[0] = "Error";
         request[1] = error;
         EUser.get("admin").sendRequest(request);

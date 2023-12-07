@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author b4bru
+ * @author Bruno dos Santos Silva - 201935031
  */
 public class EData {
     
@@ -71,6 +71,7 @@ public class EData {
         ECharExport(fOut);
         EUserExport(fOut);
     }
+    
     private static void EUserExport(FileWriter fOut) {
         //EUser.export();
         try{
@@ -118,12 +119,3 @@ public class EData {
     }
     
 }
-/*
-Atributes{
-    Map<String,EChar> characters;
-    Map<String,ESkill> skills;
-    Map<String,EEffect> effects;
-    Map<String,EItems> items;
-    Map<String,EUser> players;
-}
-*/
