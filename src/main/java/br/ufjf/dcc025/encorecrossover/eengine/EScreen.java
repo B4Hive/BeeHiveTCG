@@ -1,7 +1,6 @@
 package br.ufjf.dcc025.encorecrossover.eengine;
 
 import br.ufjf.dcc025.encorecrossover.echar.EChar;
-import br.ufjf.dcc025.encorecrossover.edata.EData;
 import br.ufjf.dcc025.encorecrossover.eskill.*;
 import br.ufjf.dcc025.encorecrossover.euser.*;
 import java.awt.event.KeyEvent;
@@ -34,8 +33,6 @@ public class EScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton6 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
         //Pre-Creation
         layeredPane = new javax.swing.JLayeredPane();
         //Post-Creation
@@ -129,10 +126,6 @@ public class EScreen extends javax.swing.JFrame {
         logoutMenuItem = new javax.swing.JMenuItem();
         helpMenu = new javax.swing.JMenu();
         aboutMenuItem = new javax.swing.JMenuItem();
-
-        jButton6.setText("jButton6");
-
-        jButton3.setText("jButton3");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Encore Crossover");
@@ -1245,8 +1238,6 @@ public class EScreen extends javax.swing.JFrame {
     private javax.swing.JTextArea inGameCharTextArea1;
     private javax.swing.JTextArea inGameCharTextArea2;
     private javax.swing.JPanel inGameStatsPanel;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton6;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane11;

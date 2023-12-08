@@ -1,4 +1,4 @@
-package br.ufjf.dcc025.encorecrossover.edata;
+package br.ufjf.dcc025.encorecrossover.eengine;
 
 import br.ufjf.dcc025.encorecrossover.echar.EChar;
 import br.ufjf.dcc025.encorecrossover.eskill.ESkill;
