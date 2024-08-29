@@ -1,9 +1,0 @@
-ESkillHeal:name=NPC HEAL, value=3, cooldown=2;
-ESkillDMG:name=NPC ATK, value=3, cooldown=0;
-ESkillDMG:name=Punch, value=3, cooldown=0;
-ESkillEffect:name=NPC DOT, value=1, cooldown=3, effect=DOT, duration=2;
-ESkillDMG:name=Boom, value=6, cooldown=3;
-ESkillEffect:name=NPC HOT, value=1, cooldown=3, effect=HOT, duration=2;
-ESkillEffect:name=NPC BUFF, value=1, cooldown=3, effect=DMG, duration=2;
-ESkillEffect:name=Rage, value=2, cooldown=4, effect=DMG, duration=4;
-ESkillEffect:name=Boil, value=2, cooldown=6, effect=HOT, duration=4;

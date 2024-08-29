@@ -1,2 +1,0 @@
-EChar:name=NPC, skills=NPC ATK/NPC HEAL/NPC DOT/NPC HOT/NPC BUFF/;
-EChar:name=RK, skills=Punch/Rage/Boom/Boil/;
